@@ -1,0 +1,99 @@
+body
+{
+background-color: rgb(116,194,255)
+}
+.bouton_statut
+{
+  border:1px rgba(0,0,0,0) solid;
+  border-radius: 2px;
+  padding: 2px;
+  margin:auto;
+  margin-left: 3px;
+  background-color: rgb(130,130,130);
+  box-shadow: 1px 2px 1px black;
+  text-decoration: none;
+  color: black;
+}
+.bouton_statut:active
+{
+  border:1px rgba(0,0,0,0) solid;
+  border-radius: 2px;
+  padding: 2px;
+  margin:auto;
+  margin-left: 3px;
+  background-color: rgb(130,130,130);
+  box-shadow: 0px 0px 0px black;
+}
+strong
+{
+  font-size: 1.5em;
+  color: black;
+  text-shadow: 1px 1px 1px rgb(255,197,153);
+}
+h2
+{
+  text-align:center;
+}
+.titre_info_entreprise
+{
+  text-decoration: none;
+  font-size: 1.0em;
+  color:white;
+}
+#statut_reponse_imminente
+{
+  text-decoration: none;
+  font-size: 2.2em;
+  color:white;
+}
+#box_classement
+{
+  width: 100%;
+  height: 480px;
+  display:flex;
+  justify-content: space-between;
+}
+.box_section
+{
+  width: 33%;
+
+}
+.box_de_tris
+{
+  border:1px black solid;
+  border-radius: 5px;
+  background-color: rgb(225,197,153);
+  width:95%;
+  height:400px;
+  margin: auto;
+  margin-top:10px;
+  overflow: auto;
+  box-shadow: 5px 5px 5px black;
+}
+#acceptation_imminente
+{
+  border:1px black solid;
+  border-radius: 5px;
+  background-color: rgb(225,197,153);
+  width:95%;
+  height:150px;
+  margin: auto;
+  margin-top:10px;
+  overflow: auto;
+  box-shadow: 5px 5px 5px black;
+}
+#hide
+{
+  display: none;
+}
+.box_entreprises
+{
+  width: 97%;
+  margin:auto;
+  margin-top: 5px;
+  border:1px black dotted;
+  border-radius: 2px;
+  background-color: rgba(81,136,178,1);
+  box-shadow: 1px 1px 1px black;
+  font-size: 0.7em;
+}
