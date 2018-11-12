@@ -17,7 +17,7 @@
       <h2>Vérification si l'entreprise existe déjà</h2>
       <form class="recherche_get" action="index.php" method="get">
         <p> <input type="text" name="recherche" autofocus> </p>
-    <p> <input type="submit" name="recherche_ok"> </p>
+    <p> <input type="submit" name="recherche_ok" value="Envoyer" /> </p>
       </form>
       <?php
       try

@@ -91,7 +91,7 @@ if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
                 <p><label for="activite">activité</label><br /><textarea name="activite" rows="4" cols="40" id="activite" required="required" >' . htmlspecialchars(trim($info_entreprise['activite'])) . '</textarea></p>
                 <p><label for="adresse">adresse de l\'entreprise</label> <br /> <textarea name="adresse" id="adresse" required="required" rows="8" cols="80">' . htmlspecialchars(trim($info_entreprise['adresse'])) . '</textarea></p>
                 <p> <input type="text" name="id_entreprise" id="hide" value=' . htmlspecialchars($info_entreprise['id']) . '> </p>
-                <p><input type="submit" name="valider" /> </p>
+                <p><input type="submit" name="valider" value="envoyer" /> </p>
           </form>
           ';
 
