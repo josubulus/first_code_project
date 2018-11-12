@@ -2,12 +2,13 @@
 //connaction a la base de donnée
 try
     {
-      $bdd = new PDO('mysql:host=localhost;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+      $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
     catch (Exception $e)
     {
       die('Erreur : '.$e->getMessage());
     }
+
  ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr" />
@@ -29,7 +30,7 @@ try
 
                 <?php
                 //requette : statut  : 1 =a démarcher 2 = acceptation imminante 3 =attente réponse 4 = refus
-                $req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM Entreprises WHERE statut=2 ORDER BY date_ajout DESC');
+                $req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE statut=2 ORDER BY date_ajout DESC');
                 //alors maintenant on affiche
 
                                     while ($entreprise=$req->fetch())
@@ -84,7 +85,7 @@ try
 
                             <?php
                             //requette : statut  : 1 =a démarcher 2 = acceptation imminante 3 =attente réponse 4 = refus
-                            $req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM Entreprises WHERE statut=1 ORDER BY date_ajout DESC');
+                            $req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE statut=1 ORDER BY date_ajout DESC');
                             //alors maintenant on affiche
                                   while ($entreprise=$req->fetch())
                                     {
@@ -129,7 +130,7 @@ try
 
                       <?php
                       //requette : statut  : 1 =a démarcher 2 = acceptation imminante 3 =attente réponse 4 = refus
-                    $req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM Entreprises WHERE statut=3 ORDER BY date_ajout DESC');
+                    $req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE statut=3 ORDER BY date_ajout DESC');
                     //alors maintenant on affiche
                           while ($entreprise=$req->fetch())
                           {
@@ -171,7 +172,7 @@ echo '
 
 <?php
 //requette : statut  : 1 =a démarcher 2 = acceptation imminante 3 =attente réponse 4 = refus
-$req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM Entreprises WHERE statut=4 ORDER BY date_ajout DESC');
+$req=$bdd->query('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE statut=4 ORDER BY date_ajout DESC');
 //alors maintenant on affiche
     while ($entreprise=$req->fetch())
                                 {

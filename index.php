@@ -22,7 +22,7 @@
       <?php
       try
           {
-            $bdd = new PDO('mysql:host=localhost;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
           }
           catch (Exception $e)
           {
@@ -31,7 +31,7 @@
 
       if(isset($_GET['recherche']) && !empty(trim($_GET['recherche'])))
       {
-        $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM Entreprises WHERE nom=:recherche');
+        $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE nom=:recherche');
         $req->execute(array('recherche'=>$_GET['recherche']));
         $entreprise_deja_presente=$req->fetch();
             if ($entreprise_deja_presente['nom'] == $_GET['recherche'])

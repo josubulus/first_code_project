@@ -8,7 +8,7 @@
   <body>
                   <?php try
                       {
-                        $bdd = new PDO('mysql:host=localhost;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                        $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                       }
                       catch (Exception $e)
                       {
@@ -26,7 +26,7 @@
 if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
 {
             $id_entreprise=intval($_GET['id_entreprise']);
-          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM Entreprises WHERE id=:id_entreprise');
+          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE id=:id_entreprise');
           $req->execute(array('id_entreprise'=>$id_entreprise));
           $info_entreprise=$req->fetch();
           //affichage info entreprise
