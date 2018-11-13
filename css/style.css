@@ -1,7 +1,72 @@
+/*------mise en page générale : ---------*/
 body
 {
 background-color: rgb(116,194,255)
 }
+strong
+{
+  font-size: 1.5em;
+  color: black;
+  text-shadow: 1px 1px 1px rgb(255,197,153);
+}
+h2
+{
+  text-align:center;
+}
+
+/*-----nav-------*/
+.menu
+{
+  width:100%;
+  height : 40px;
+
+  display:flex;
+  justify-content: space-around;
+
+}
+.bouton_menu
+{
+  border:1px black solid;
+  border-radius: 5px;
+  background-color: rgb(225,197,153);
+  width:95%;
+  height:30px;
+  margin: auto;
+  box-shadow: 5px 5px 5px black;
+
+  text-align: center;
+}
+.bouton_menu:hover
+{
+  border:1px black solid;
+  border-radius: 5px;
+  background-color: rgb(225,197,153);
+  width:95%;
+  height:30px;
+  margin: auto;
+  box-shadow: 1px 1px 4px black;
+
+  text-align: center;
+}
+.bouton_menu:active
+{
+  border:1px black solid;
+  border-radius: 5px;
+  background-color: rgb(225,197,153);
+  width:95%;
+  height:30px;
+  margin: auto;
+  box-shadow: 3px 3px 4px black;
+
+  text-align: center;
+}
+.lien_menu
+{
+  width: 50%;
+  color: black;
+  text-decoration: none;
+}
+/*----mise en page entreprise-------*/
 .bouton_statut
 {
   border:1px rgba(0,0,0,0) solid;
@@ -24,22 +89,25 @@ background-color: rgb(116,194,255)
   background-color: rgb(130,130,130);
   box-shadow: 0px 0px 0px black;
 }
-strong
-{
-  font-size: 1.5em;
-  color: black;
-  text-shadow: 1px 1px 1px rgb(255,197,153);
-}
-h2
-{
-  text-align:center;
-}
+
 .titre_info_entreprise
 {
   text-decoration: none;
   font-size: 1.0em;
   color:white;
 }
+.box_entreprises
+{
+  width: 97%;
+  margin:auto;
+  margin-top: 5px;
+  border:1px black dotted;
+  border-radius: 2px;
+  background-color: rgba(81,136,178,1);
+  box-shadow: 1px 1px 1px black;
+  font-size: 0.7em;
+}
+/*---------Classement entreprises : -------*/
 #statut_reponse_imminente
 {
   text-decoration: none;
@@ -85,15 +153,4 @@ h2
 #hide
 {
   display: none;
-}
-.box_entreprises
-{
-  width: 97%;
-  margin:auto;
-  margin-top: 5px;
-  border:1px black dotted;
-  border-radius: 2px;
-  background-color: rgba(81,136,178,1);
-  box-shadow: 1px 1px 1px black;
-  font-size: 0.7em;
 }

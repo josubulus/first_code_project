@@ -7,12 +7,13 @@
   </head>
   <body>
     <header>
+          <nav>
+              <?php include('include/nav.php'); ?>
+          </nav>
       <h1>DemarchlanD</h1> <br /><h2>Entrer un nouvelle entreprise</h2>
       <p> <em>note pour moi : développer page de suppression  d'entreprise. </em> </p>
     </header>
-    <nav>
-        <?php include('include/nav.php'); ?>
-    </nav>
+
     <section class="recherche">
       <h2>Vérification si l'entreprise existe déjà</h2>
       <form class="recherche_get" action="index.php" method="get">

@@ -1,2 +1,5 @@
 # first_code_project
-utilisation des status de bdd pb de log base de donnée a résoudre
+Pour essayer le projet :
+creer une bdd et la nommer : demarchage.
+importer la table presente dans le dossier bdd du projet. 
+

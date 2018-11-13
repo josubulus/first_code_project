@@ -77,7 +77,7 @@ if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
                 <p> <label for="notes">Modifier / mettre a jour / écrire la Note : </label> </p>
                 <p> <textarea name="notes" rows="8" cols="80">' . strip_tags(trim($info_entreprise['notes'])) . '</textarea> </p>
                 <p> <input type="text" name="id_entreprise" id="hide" value="' . htmlspecialchars($info_entreprise['id']) . '"> </p>
-                <p> <input type="submit" name="envoyer"> </p>
+                <p> <input type="submit" name="envoyer" value="envoyer" /> </p>
           </form>
           ';
 
