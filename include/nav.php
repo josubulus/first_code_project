@@ -11,5 +11,10 @@
       classement
      </div>
    </a>
+   <a class="lien_menu" href="conseils.php">
+     <div class="bouton_menu">
+      cible & conseils recherche
+     </div>
+   </a>
 
 </div>
