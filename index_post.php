@@ -29,5 +29,5 @@ if (isset($_POST['nom']) && isset($_POST['tel']) && isset($_POST['mail']) && iss
 
 
 
-header('location:index.php')
+header('location:index.php');
 ?>
