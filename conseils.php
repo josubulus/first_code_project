@@ -79,7 +79,7 @@ try
                           while ($conseils = $req->fetch())
                           {
                               ?>
-                              <p>Conseils : <?php echo '' . nl2br($conseils['conseil']) . ''; ?> </p>
+                              <p> <p><em>Conseils</em> :</p> <?php echo '' . nl2br(htmlspecialchars($conseils['conseil'])) . ''; ?> </p>
                               <p> <a class="bouton_statut"  href="conseils.php?suppr=1&amp;id_ok=<?php echo '' . $conseils['id'] . ''; ?>">supprimer conseil</a>
                                <a class="bouton_statut"  href="conseils.php?update=1&amp;id_ok=<?php echo '' . $conseils['id'] . ''; ?>">mettre a jour le conseil</a> </p>
               <?php
