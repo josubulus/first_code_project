@@ -86,9 +86,9 @@ try
               <?php
               cadre(2,'!! OK !!');
 //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
-              cadre(1,'Entreprises à demarcher');
+              cadre(3,'Attente Réponse');
 //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
-              cadre(3,'attente reponse');
+              cadre(1,'A demarcher');
 //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
               cadre(4,'refus');
               ?>
