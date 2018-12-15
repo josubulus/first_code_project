@@ -29,78 +29,89 @@ if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
           $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret FROM entreprises WHERE id=:id_entreprise');
           $req->execute(array('id_entreprise'=>$id_entreprise));
           $info_entreprise=$req->fetch();
-          //affichage info entreprise
-                                  ?><div class="box_entreprises"><?php
-                  if ( isset($info_entreprise['statut_mail']) && $info_entreprise['statut_mail'] == 2)
-                   {
-                     echo '<p> <a href="notes_post.php?statut_mail=1&amp;id_entreprise=' . $info_entreprise['id'] . '"> X </a> MAIL ENVOYE le : ' . $info_entreprise['date_email'] . '</p>';
-                   }
-                   else
-                   {
-                     echo '<p><a class="bouton_statut" href="notes_post.php?statut_mail=2&amp;id_entreprise=' . $info_entreprise['id'] . '"> contact par mail effectué</a></p>';
-                   }
-                           if ($info_entreprise['statut'] == 1)
-                           {
-                             echo '<p class="titre_info_entreprise">Statut actuel : A démarcher </p>';
-                           }
-                           elseif ($info_entreprise['statut'] == 3)
-                           {
-                             echo '<p class="titre_info_entreprise">Statut actuel : Attente réponse </p>';
-                           }
-                           elseif ($info_entreprise['statut'] == 4)
-                           {
-                             echo '<p class="titre_info_entreprise">Statut actuel : Refusé </p>';
-                           }
-                           elseif ($info_entreprise['statut'] == 2)
-                           {
-                             echo '<p class="titre_info_entreprise">Statut actuel : <em id="statut_reponse_imminente">REPONSE IMMINANTE</em> </p>';
-                           }
-?>
-<form action="notes_post.php" method="post">
-  <select name="interret" id="interret">
-<!--affichage en php des différente option selectionné en fonction de la bdd -->
-    <?php if ($info_entreprise['interret']==3) {
-      echo '<option value="3" selected >très interressant</option>';
-    }
-    else {
-      echo '<option value="3">très interressant</option>';
-    }
-    if ($info_entreprise['interret']==2) {
-      echo '<option value="2" selected>interressant</option>';
-    }
-    else {
-      echo '<option value="2">interressant</option>';
-    }
-    if ($info_entreprise['interret']==1) {
-      echo '<option value="1" selected>juste un taf</option>';
-    }
-    else {
-      echo '<option value="1">juste un taf</option>';
-    }
-    ?>
+        //suppr entreprise
+if (isset($_GET['suppr']) && $_GET['suppr'] ==1 && $_GET['id_entreprise'] == $info_entreprise['id']) {
+              ?>
+            <h2>Etes vous sur de vouloir supprimer : <?php echo $info_entreprise['nom'] ?> </h2>
+              <a class="bouton_statut" href="notes_post.php?suppr=1&amp;id_entreprise=<?php echo $info_entreprise['id'] ?>">oui</a>
+                <a class="bouton_statut" href="notes.php?id_entreprise= <?php echo $_GET['id_entreprise'] ?> ">non</a>
+              <?php
+            }
+else {
+            //affichage info entreprise
+                ?><div class="box_entreprises"><?php
+              if ( isset($info_entreprise['statut_mail']) && $info_entreprise['statut_mail'] == 2)
+              {
+              echo '<p> <a href="notes_post.php?statut_mail=1&amp;id_entreprise=' . $info_entreprise['id'] . '"> X </a> MAIL ENVOYE le : ' . $info_entreprise['date_email'] . '</p>';
+              }
+              else
+              {
+              echo '<p><a class="bouton_statut" href="notes_post.php?statut_mail=2&amp;id_entreprise=' . $info_entreprise['id'] . '"> contact par mail effectué</a></p>';
+              }
+              if ($info_entreprise['statut'] == 1)
+              {
+              echo '<p class="titre_info_entreprise">Statut actuel : A démarcher </p>';
+              }
+              elseif ($info_entreprise['statut'] == 3)
+              {
+              echo '<p class="titre_info_entreprise">Statut actuel : Attente réponse </p>';
+              }
+              elseif ($info_entreprise['statut'] == 4)
+              {
+              echo '<p class="titre_info_entreprise">Statut actuel : Refusé </p>';
+              }
+              elseif ($info_entreprise['statut'] == 2)
+              {
+              echo '<p class="titre_info_entreprise">Statut actuel : <em id="statut_reponse_imminente">REPONSE IMMINANTE</em> </p>';
+              }
+              ?>
+              <form action="notes_post.php" method="post">
+              <select name="interret" id="interret">
+              <!--affichage en php des différente option selectionné en fonction de la bdd -->
+              <?php if ($info_entreprise['interret']==3) {
+              echo '<option value="3" selected >très interressant</option>';
+              }
+              else {
+              echo '<option value="3">très interressant</option>';
+              }
+              if ($info_entreprise['interret']==2) {
+              echo '<option value="2" selected>interressant</option>';
+              }
+              else {
+              echo '<option value="2">interressant</option>';
+              }
+              if ($info_entreprise['interret']==1) {
+              echo '<option value="1" selected>juste un taf</option>';
+              }
+              else {
+              echo '<option value="1">juste un taf</option>';
+              }
+              ?>
 
-    <input type="text" name="id" id="hide" value=" <?php echo $info_entreprise['id'] ?> ">
-  </select>
-  <input type="submit" name="submit" value="ok !!" />
-</form><br />
+              <input type="text" name="id" id="hide" value=" <?php echo $info_entreprise['id'] ?> ">
+              </select>
+              <input type="submit" name="submit" value="ok !!" />
+              </form><br />
 
-<?php
-          echo '
+              <?php
+              echo '
 
-                  <p>ajouté le : ' . htmlspecialchars($info_entreprise['date_affich']) . '</p>
-                  <p> <strong>' . htmlspecialchars($info_entreprise['nom']) . '</strong>     <em class="titre_info_entreprise">activité</em> : ' . htmlspecialchars($info_entreprise['activite']) . '
-                   <em class="titre_info_entreprise">TEL</em> :  ' . htmlspecialchars($info_entreprise['tel']) . '
-                   <em class="titre_info_entreprise">Mail</em> :  ' . htmlspecialchars($info_entreprise['mail']) . '
-                   <em class="titre_info_entreprise">Adressse</em> :  ' . htmlspecialchars($info_entreprise['adresse']) . '</p>
+              <p>ajouté le : ' . htmlspecialchars($info_entreprise['date_affich']) . '</p><a class="bouton_statut" href="notes.php?suppr=1&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">SUPPRIMER ENTREPRISE</a>
+              <p> <strong>' . htmlspecialchars($info_entreprise['nom']) . '</strong>     <em class="titre_info_entreprise">activité</em> : ' . htmlspecialchars($info_entreprise['activite']) . '
+              <em class="titre_info_entreprise">TEL</em> :  ' . htmlspecialchars($info_entreprise['tel']) . '
+              <em class="titre_info_entreprise">Mail</em> :  ' . htmlspecialchars($info_entreprise['mail']) . '
+              <em class="titre_info_entreprise">Adressse</em> :  ' . htmlspecialchars($info_entreprise['adresse']) . '</p>
 
-                       <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
-                <p><a class="bouton_statut" href="notes_post.php?statut=4&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">refus</a>
-                <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">a demarcher</a>
-                <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">attente rep</a>
-                <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">REPONSE OK IMMINANTE</a><br />
-                   <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p>' . nl2br($info_entreprise['notes']) . '</p>
-                  ';
-                              ?></div><?php
+              <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
+              <p><a class="bouton_statut" href="notes_post.php?statut=4&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">refus</a>
+              <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">a demarcher</a>
+              <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">attente rep</a>
+              <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">REPONSE OK IMMINANTE</a><br />
+              <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p>' . nl2br($info_entreprise['notes']) . '</p>
+              ';
+              ?></div><?php
+}
+
           // ecriture notes et transmition de l'id_entreprise en post via un champ caché
              echo '
           <form action="notes_post.php" method="post">

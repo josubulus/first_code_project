@@ -69,7 +69,23 @@ try
                                                           'id'=>$id_ok));
 
                       }
+                      //supprimer entreprise :
+                      if (isset($_GET['suppr']) && $_GET['suppr'] == 1 && isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
+                       {
+                        $id_ok_suppr=intval($_GET['id_entreprise']);
+                        $req=$bdd->prepare("DELETE FROM entreprises WHERE id=:id");
+                        $req->execute(array('id'=>$id_ok_suppr));
+                        /*$req->blidValue(":id",$id_ok,PDO::PARAM_INT);
+                        $req->execute();*/
+                      }
 
+//changement du header en fonction de l'action effectué :
 
-header('location:notes.php?id_entreprise=' . $id_ok . '');
+if (isset($id_ok)) {
+  header('location:notes.php?id_entreprise=' . $id_ok . '');
+}
+elseif (isset($id_ok_suppr)) {
+  header('location:classement.php');
+}
+
  ?>
