@@ -31,6 +31,13 @@ try
           ));
 
         }
+//écriture du status d'interret de l'entreprisetrès interressant 3 interressant 2  juste un taf 1
+  if (isset($_POST['interret']) && !empty($_POST['interret']) && $_POST['interret'] <= 3 && $_POST['interret'] >= 1  && isset($_POST['id']) && !empty($_POST['id']))
+  {
+     $req=$bdd->prepare("UPDATE entreprises SET interret=:interret WHERE id=:id");
+     $req->execute(array('interret' => $_POST['interret'],
+                          'id' =>intval($_POST['id'])));
+  }
 
 header('location:classement.php');
  ?>

@@ -24,8 +24,6 @@ if (isset($_POST['nom']) && isset($_POST['tel']) && isset($_POST['mail']) && iss
       }
 
 
-      //recherche d'entreprise déjà existante :
-
 
 
 

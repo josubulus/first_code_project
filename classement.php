@@ -25,15 +25,45 @@ try
                          <h2>' . $titre . '</h2>
                             <div class="box_de_tris">';
               //requette de selection des donnée par status de l'entreprise
-                          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE statut=:status ORDER BY date_ajout DESC');
+                          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret FROM entreprises WHERE statut=:status ORDER BY interret DESC');
                           $req->execute(array('status' => $status));
                           //alors maintenant on affiche
                                         while ($entreprise=$req->fetch())
                                     {
                                     echo '<div class="box_entreprises">' ;
+//entête de l'entreprise avec les différents interrets dans un form en:
+                              ?>
+                              <!--TITRE de l'entreprise-->
+                              <p> <strong> <?php echo htmlspecialchars($entreprise['nom']) ?> : </strong>
+                              <form action="classement_post.php" method="post">
+                                <select name="interret" id="interret">
+                              <!--affichage en php des différente option selectionné en fonction de la bdd -->
+                                  <?php if ($entreprise['interret']==3) {
+                                    echo '<option value="3" selected >très interressant</option>';
+                                  }
+                                  else {
+                                    echo '<option value="3">très interressant</option>';
+                                  }
+                                  if ($entreprise['interret']==2) {
+                                    echo '<option value="2" selected>interressant</option>';
+                                  }
+                                  else {
+                                    echo '<option value="2">interressant</option>';
+                                  }
+                                  if ($entreprise['interret']==1) {
+                                    echo '<option value="1" selected>juste un taf</option>';
+                                  }
+                                  else {
+                                    echo '<option value="1">juste un taf</option>';
+                                  }
+                                  ?>
 
+                                  <input type="text" name="id" id="hide" value=" <?php echo $entreprise['id'] ?> ">
+                                </select>
+                                <input type="submit" name="submit" value="ok !!" />
+                              </form><br />
+                                <?php
 
-                              echo '<p> <strong>' . htmlspecialchars($entreprise['nom']) . ' : </strong>';
                                     if (isset($entreprise['notes']))
                                     {
                                       echo '<a class="titre_info_entreprise" href="notes.php?id_entreprise=' . htmlspecialchars($entreprise['id']) . '">|| NOTES ! || </a>';
@@ -46,17 +76,17 @@ try
                                                else {
                                                 echo '<a class="bouton_statut" href="classement_post.php?statut_mail=2&amp;id_entreprise=' . htmlspecialchars($entreprise['id']) . '">Envoyer mail</a></p>';
                                                }
-                            echo '
-                                <p> <em class="titre_info_entreprise"> Activité </em> : ' . htmlspecialchars($entreprise['activite']) . ' </p>
-                                <em class="titre_info_entreprise">ajouté le</em> : ' . htmlspecialchars($entreprise['date_affich']) . '</p>
+                        ?>
+                        <p> <em class="titre_info_entreprise"> Activité </em> : <?php echo htmlspecialchars($entreprise['activite']) ?> </p>
+                        <em class="titre_info_entreprise">ajouté le</em> :<?php echo htmlspecialchars($entreprise['date_affich']) ?> </p>
 
-                                     <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
-                              <p><a class="bouton_statut" href="classement_post.php?statut=4&amp;id_entreprise=' . htmlspecialchars($entreprise['id']) . '">refus</a>
-                              <a class="bouton_statut" href="classement_post.php?statut=1&amp;id_entreprise=' . htmlspecialchars($entreprise['id']) . '">a demarcher</a>
-                              <a class="bouton_statut" href="classement_post.php?statut=3&amp;id_entreprise=' . htmlspecialchars($entreprise['id']) . '">attente rep</a>
-                              <a class="bouton_statut" href="notes.php?id_entreprise=' . htmlspecialchars($entreprise['id']) . '">GERER</a></p>
+                             <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
+                        <p><a class="bouton_statut" href="classement_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($entreprise['id']) ?> ">refus</a>
+                        <a class="bouton_statut" href="classement_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">a demarcher</a>
+                        <a class="bouton_statut" href="classement_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">attente rep</a>
+                        <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">GERER</a></p>
 
-                                ';
+                        <?php
                                 echo '</div>';
 
             }

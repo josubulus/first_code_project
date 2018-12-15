@@ -9,6 +9,15 @@ try
       die('Erreur : '.$e->getMessage());
     }
 
+    //écriture du status d'interret de l'entreprisetrès interressant 3 interressant 2  juste un taf 1
+    if (isset($_POST['interret']) && !empty($_POST['interret']) && $_POST['interret'] <= 3 && $_POST['interret'] >= 1  && isset($_POST['id']) && !empty($_POST['id']))
+    {
+      $id_ok=intval($_POST['id']);
+       $req=$bdd->prepare("UPDATE entreprises SET interret=:interret WHERE id=:id");
+       $req->execute(array('interret' => $_POST['interret'],
+                            'id' =>$id_ok));
+    }
+
 
 //écriture de la note
     if (isset($_POST['notes']) && !empty(trim($_POST['notes'])) && isset($_POST['id_entreprise']) && !empty($_POST['id_entreprise']))
@@ -45,7 +54,7 @@ try
                 ));
 
               }
-              //update des donnée de l'entreprise en cour de codage
+              //update des donnée de l'entreprise
               //écrire les infos des entreprise dans la base de donnée
               if (isset($_POST['nom']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['adresse']) && isset($_POST['activite']) && isset($_POST['id_entreprise'])
               && !empty(trim($_POST['nom'])) && !empty(trim($_POST['mail'])) && !empty(trim($_POST['adresse'])) && !empty(trim($_POST['activite'])))
@@ -61,9 +70,6 @@ try
 
                       }
 
+
 header('location:notes.php?id_entreprise=' . $id_ok . '');
-
-
-
-
  ?>
