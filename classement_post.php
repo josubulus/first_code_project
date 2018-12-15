@@ -38,6 +38,14 @@ try
      $req->execute(array('interret' => $_POST['interret'],
                           'id' =>intval($_POST['id'])));
   }
-
+//supprimer entreprise :
+if (isset($_GET['suppr']) && $_GET['suppr'] == 1 && isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
+ {
+  $id_ok=intval($_GET['id_entreprise']);
+  $req=$bdd->prepare("DELETE FROM entreprises WHERE id=:id");
+  $req->execute(array('id'=>$id_ok));
+  /*$req->blidValue(":id",$id_ok,PDO::PARAM_INT);
+  $req->execute();*/
+}
 header('location:classement.php');
  ?>
