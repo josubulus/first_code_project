@@ -20,9 +20,26 @@ $_SESSION['page']="inscription";//testé fonctionnel
       <h2>test form</h2>
       <p>
                                       <!--ici les tests -->
-<?php echo $_SESSION['mail_retour']; ?>
-<?php echo $_SESSION['mdp_retour']; ?>
-<?php echo $_SESSION['pseudo_retour']; ?>
+<?php
+if (isset($_SESSION['post_retour'])) {
+  // code...
+}
+switch($_SESSION['post_retour']){
+  case "mdp non conforme":
+    echo "<p><em>confirmation mot de passe incorrect</em></p>";
+    break;
+  case "le pseudo existe déjà":
+    echo "<p><em>le pseudo existe déjà</em></p>";
+    break;
+  case "le mail existe déjà":
+    echo "<p><em>mail déjà existant</em></p>";
+    break;
+  case "ça marche":
+    echo '<p><em>ça marche</em></p>';
+    break;
+}
+
+ ?>
 
 
       </p>
