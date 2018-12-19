@@ -9,6 +9,10 @@ strong
   color: black;
   text-shadow: 1px 1px 1px rgb(255,197,153);
 }
+h1
+{
+  text-align: center;
+}
 h2
 {
   text-align:center;
@@ -22,6 +26,10 @@ em
 p
 {
   font-size: 1.3em;
+}
+td
+{
+  text-align: right;
 }
 
 /*-----nav-------*/

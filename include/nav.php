@@ -5,6 +5,11 @@
         ajouter une entreprise
     </div>
   </a>
+  <a class="lien_menu" href="inscription.php">
+    <div class="bouton_menu">
+        inscription(dev-en-cour)
+    </div>
+  </a>
 
    <a class="lien_menu" href="classement.php">
      <div class="bouton_menu">
