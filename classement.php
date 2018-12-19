@@ -36,7 +36,7 @@ try
                                                     ?>
 
                                         <?php
-                                        // suppression de l'entreprise
+                                        // suppression de l'entreprise (vérifier la sécurité sur le get) 
                                         if (isset($_GET['suppr']) && $_GET['suppr'] ==1 && $_GET['id_entreprise'] == $entreprise['id']) {
                                           ?>
                                       <h2>Etes vous sur de vouloir supprimer : <?php echo $entreprise['nom'] ?> </h2>
