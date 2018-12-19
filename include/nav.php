@@ -7,7 +7,7 @@
   </a>
   <a class="lien_menu" href="inscription.php">
     <div class="bouton_menu">
-        inscription(dev-en-cour)
+        log in (dev) / inscription
     </div>
   </a>
 
