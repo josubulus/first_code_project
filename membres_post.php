@@ -49,6 +49,28 @@ if (isset($_POST['pseudo']) && !empty(trim($_POST['pseudo'])) && isset($_POST['p
 
 }//vérification form post complet
 
+if (isset($_POST['login_pseudo']) && isset($_POST['login_pass'])) //tchek variables post
+{
+      $req=$bdd->prepare('SELECT * FROM membres WHERE pseudo=:pseudo');
+      $req->execute(array('pseudo'=>$_POST['login_pseudo']));
+      $pseudo=$req->fetch();
+  if ($pseudo['pseudo']==$_POST['login_pseudo']){//tchek pseudo // rajouter tchek mdp et vérifier mdp sur la ligne du user !!!!! 
+        $pass_hash=password_hash($_POST['login_pass'],PASSWORD_DEFAULT);
+        $req=$bdd->prepare('SELECT * FROM membres WHERE pass=:pass');
+        $req->execute(array('pass'=>$pass_hash));
+        $pass=$req->fetch();
+          if ($pass['pass']==$pass_hash) {
+            // code...
+          }
+
+  }//tchek pseudo
+  else {
+    $_SESSION['post_retour']="pseudo erroné";
+  }
+}//tchek variables post
+
+
+
 //----------------login-------------------
 
 

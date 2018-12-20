@@ -67,6 +67,7 @@ if (isset($_SESSION['post_retour'])) {
             </tr>
           </table>
         </form>
+        <p> <a class="bouton_statut" href="inscription.php">Connexion</a> </p>
   </section>
 
   <?php
@@ -76,7 +77,7 @@ if (isset($_SESSION['post_retour'])) {
       <section>
             <?php $_SESSION['page']="login"; ?>
             <h1>LOGIN</h1>
-          <p><a href="inscription.php?inscription=1">Inscription</a></p>
+          <p><a class="bouton_statut" href="inscription.php?inscription=1">Inscription</a></p>
           <p><a href="membres_post.php">test ret login post</a></p>
 
 
@@ -90,10 +91,22 @@ if (isset($_SESSION['post_retour'])) {
                 <td> <label for="login_pass"></label>mot de passe </td>
                 <td> <input type="password" name="pass" id="login_pass"/> </td>
               </tr>
+              <tr>
+                <td> <input type="submit" name="submit" value="login"> </td>
+              </tr>
             </table>
           </form>
-          <p><a href="logout.php">logout</a></p>
+          <p><a class="bouton_statut" href="logout.php">logout</a></p>
+          <?php
+  switch ($_SESSION['post_retour']) {
+    case 'pseudo erroné':
+      ?><p><em>pseudo erroné</em></p><?php
+      break;
+
+  }
+           ?>
         </section>
+
 <?php
   }//page login
    ?>
