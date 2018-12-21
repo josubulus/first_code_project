@@ -37,8 +37,9 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
 
         if(isset($_GET['recherche']) && !empty(trim($_GET['recherche'])))
         {
-          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes FROM entreprises WHERE nom=:recherche');
-          $req->execute(array('recherche'=>$_GET['recherche']));
+          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret,id_membre FROM entreprises WHERE nom=:recherche AND id_membre=:id_membre');
+          $req->execute(array('recherche'=>$_GET['recherche'],
+                              'id_membre'=>$_SESSION['id_membre']));
           $entreprise_deja_presente=$req->fetch();
               if ($entreprise_deja_presente['nom'] == $_GET['recherche'])
                {

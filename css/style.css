@@ -172,3 +172,8 @@ td
 {
   display: none;
 }
+/*----------page admin -----------*/
+.membres tr td{
+  width: 250px;
+  text-align: right;
+}

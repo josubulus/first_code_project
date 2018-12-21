@@ -77,9 +77,6 @@ if (isset($_SESSION['post_retour'])) {
       <section>
 
             <h1>LOGIN</h1>
-          <p><a href="membres_post.php">test ret login post</a></p>
-
-
           <form action="membres_post.php" method="post">
             <table>
               <tr>

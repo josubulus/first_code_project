@@ -31,7 +31,7 @@ if (isset($_POST['pseudo']) && !empty(trim($_POST['pseudo'])) && isset($_POST['p
                     $_SESSION['post_retour']="le mail existe déjà";
                   }
                   else {  //requette écriture nouveau membre
-                    $_SESSION['post_retour']='ça marche';
+                    $_SESSION['post_retour']='';
                     //$_SESSION['test_post']=$_POST['mail'];
                             // H pass
                                $pass_hash=password_hash($_POST['pass'],PASSWORD_DEFAULT);
@@ -63,6 +63,7 @@ if (isset($_POST['login_pseudo']) && isset($_POST['login_pass'])) //tchek variab
           if (password_verify($_POST['login_pass'],$login['pass'])) {//tchek mdp
             $_SESSION['page']="login_ok";
             $_SESSION['id_membre']=$login['id'];
+            $_SESSION['pseudo_membre']=$login['pseudo'];
 
           }//tchek mdp
           else {
@@ -75,9 +76,19 @@ if (isset($_POST['login_pseudo']) && isset($_POST['login_pass'])) //tchek variab
   }
 }//tchek variables post
 
+//---------supression membre-------
+if (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {  
+        //suppr membre :
+          $req=$bdd->prepare('DELETE FROM membres WHERE id=:id_membre');
+          $req->execute(array('id_membre'=>$_GET['id_membre']));
+          $req_entreprise=$bdd->prepare('DELETE FROM entreprises WHERE id_membre=:id_membre');
+          $req_entreprise->execute(array('id_membre'=>$_GET['id_membre']));
 
 
-//----------------login-------------------
+}
+
+
+
 
 
 //header en fonction de la page qui envoit le formulaire tester et fonctionnnel
@@ -90,6 +101,9 @@ if (isset($_SESSION['page']) && $_SESSION['page']=="login") {
 if (isset($_SESSION['page']) && $_SESSION['page']=="login_ok")
 {
   header('location:classement.php');
+}
+if (isset($_GET['id_membre'])) {
+  header('location:admin.php');
 }
 
      ?>

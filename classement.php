@@ -133,7 +133,7 @@ try
 <!---affichage des classements----->
   <section id="box_classement">
               <?php
-              cadre(2,'!! OK !!');
+              cadre(2,'<em>!! OK !!</em>');
 //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
               cadre(3,'Attente Réponse');
 //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
