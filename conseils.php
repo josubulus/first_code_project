@@ -1,4 +1,5 @@
 <?php
+session_start();
 //connaction a la base de donnée
 try
     {
@@ -51,8 +52,9 @@ try
           //mettre a jour le conseil : finir de sécurisé le get sur id
           elseif (isset($_GET['update']) && !empty($_GET['update']) && $_GET['update']==1 && isset($_GET['id_ok']) && !empty($_GET['id_ok']))
           {//afficher texte actuel
-            $req=$bdd->prepare('SELECT id,DATE_FORMAT(date_conseil,"%d / %m / %Y"),conseil FROM conseils WHERE id=:id_update');
-            $req->execute(array('id_update'=>intval($_GET['id_ok'])));
+            $req=$bdd->prepare('SELECT id,DATE_FORMAT(date_conseil,"%d / %m / %Y"),conseil,id_membre FROM conseils WHERE id=:id_update AND id_membre=:id_membre');
+            $req->execute(array('id_update'=>intval($_GET['id_ok']),
+                                'id_membre'=>$_SESSION['id_membre']));
             $conseils = $req->fetch();
             ?>
             <p> <a class="bouton_statut" href="conseils.php">Retour</a> </p>
@@ -70,11 +72,13 @@ try
           }
           else // sinon afficher les conseil exsistant
            {
+
               ?>
               <p> <a class="bouton_statut" href="conseils.php?new=1">Nouveau conseil</a> </p>
                   <div class="box_de_tris"><!---cadre d'affichage du conseil-->
                     <?php
-                        $req=$bdd->query('SELECT id,DATE_FORMAT(date_conseil,"%d / %m / %Y"),conseil FROM conseils ORDER BY date_conseil DESC');
+                        $req=$bdd->prepare('SELECT id,DATE_FORMAT(date_conseil,"%d / %m / %Y"),conseil,id_membre FROM conseils WHERE id_membre=:id_membre ORDER BY date_conseil DESC');
+                        $req->execute(array('id_membre'=>$_SESSION['id_membre']));
                         /*$conseils = $req->fetch();*/
                           while ($conseils = $req->fetch())
                           {

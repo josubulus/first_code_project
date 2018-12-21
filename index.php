@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok 
+if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
 {
   ?>
   <!DOCTYPE html>

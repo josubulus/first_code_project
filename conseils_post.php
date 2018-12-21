@@ -1,4 +1,5 @@
 <?php
+session_start();
 //connection a la base de donnée
 try
     {
@@ -19,8 +20,8 @@ try
 //ajouter conseils  ajouter fonction strip espace
   if (isset($_POST['conseil']) && !empty($_POST['conseil']))
        {
-         $req=$bdd->prepare('INSERT INTO conseils(date_conseil,conseil) VALUES ( NOW(),:conseil )');
-         $req->execute(array('conseil'=>$_POST['conseil']));
+         $req=$bdd->prepare('INSERT INTO conseils(date_conseil,conseil,id_membre) VALUES ( NOW(),:conseil,:id_membre )');
+         $req->execute(array('conseil'=>$_POST['conseil'],'id_membre'=>$_SESSION['id_membre']));
        }
 //update conseils ajouter fonction strip espace
   if (isset($_POST['update']) && !empty($_POST['update']) && isset($_POST['id_ok']) && !empty($_POST['id_ok']))

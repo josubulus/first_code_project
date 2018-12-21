@@ -1,6 +1,4 @@
-<?php session_start();
-
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr"/>
   <head>
@@ -10,9 +8,10 @@
   </head>
   <body>
     <header>
-      <nav>
-          <?php include('include/nav.php'); ?>
-      </nav>
+    <nav>
+      <p> <a class="bouton_statut" href="inscription.php">Connexion</a> </p>
+      <p><a class="bouton_statut" href="inscription.php?inscription=1">Inscription</a></p>
+    </nav>
     </header>
     <?php
   if(isset($_GET['inscription']) && $_GET['inscription']==1)
@@ -67,17 +66,17 @@ if (isset($_SESSION['post_retour'])) {
             </tr>
           </table>
         </form>
-        <p> <a class="bouton_statut" href="inscription.php">Connexion</a> </p>
+
   </section>
 
   <?php
 }//page inscription
   else {//page login
+    $_SESSION['page']="login";
     ?>
       <section>
-            <?php $_SESSION['page']="login"; ?>
+
             <h1>LOGIN</h1>
-          <p><a class="bouton_statut" href="inscription.php?inscription=1">Inscription</a></p>
           <p><a href="membres_post.php">test ret login post</a></p>
 
 
@@ -85,31 +84,29 @@ if (isset($_SESSION['post_retour'])) {
             <table>
               <tr>
                 <td> <label for="login_pseudo"></label>pseudo </td>
-                <td> <input type="text" name="pseudo"id="login_pseudo" required/> </td>
+                <td> <input type="text" name="login_pseudo" id="login_pseudo" required/> </td>
               </tr>
               <tr>
                 <td> <label for="login_pass"></label>mot de passe </td>
-                <td> <input type="password" name="pass" id="login_pass"/> </td>
+                <td> <input type="password" name="login_pass" id="login_pass"/> </td>
               </tr>
               <tr>
                 <td> <input type="submit" name="submit" value="login"> </td>
               </tr>
             </table>
           </form>
-          <p><a class="bouton_statut" href="logout.php">logout</a></p>
+
           <?php
   switch ($_SESSION['post_retour']) {
     case 'pseudo erroné':
       ?><p><em>pseudo erroné</em></p><?php
       break;
-
-  }
+    case 'mdp erroné':
+     ?> <p> <em>mot de passe erroné</em> </p> <?php
+     break;
+   }
            ?>
         </section>
-
-<?php
-  }//page login
-   ?>
-
+<?php } ?>
   </body>
 </html>

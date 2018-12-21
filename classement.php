@@ -1,5 +1,6 @@
 <?php
-//connaction a la base de donnée
+session_start();
+//connection a la base de donnée
 try
     {
       $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -25,8 +26,9 @@ try
                                                <h2>' . $titre . '</h2>
                                                   <div class="box_de_tris">';
                                     //requette de selection des donnée par status de l'entreprise
-                                                $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret FROM entreprises WHERE statut=:status ORDER BY interret DESC');
-                                                $req->execute(array('status' => $status));
+                                                $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret,id_membre FROM entreprises WHERE statut=:status AND id_membre=:id_membre ORDER BY interret DESC');
+                                                $req->execute(array('status' => $status,
+                                                'id_membre'=>$_SESSION['id_membre']));
                                                 //alors maintenant on affiche
                                                               while ($entreprise=$req->fetch())
                                                           {
@@ -36,7 +38,7 @@ try
                                                     ?>
 
                                         <?php
-                                        // suppression de l'entreprise (vérifier la sécurité sur le get) 
+                                        // suppression de l'entreprise (vérifier la sécurité sur le get)
                                         if (isset($_GET['suppr']) && $_GET['suppr'] ==1 && $_GET['id_entreprise'] == $entreprise['id']) {
                                           ?>
                                       <h2>Etes vous sur de vouloir supprimer : <?php echo $entreprise['nom'] ?> </h2>
