@@ -60,10 +60,11 @@ try
               && !empty(trim($_POST['nom'])) && !empty(trim($_POST['mail'])) && !empty(trim($_POST['adresse'])) && !empty(trim($_POST['activite'])))
                       {
                             $id_ok=intval($_POST['id_entreprise']);
-                                      $req=$bdd->prepare('UPDATE entreprises SET nom=:nom,tel=:tel,mail=:mail,adresse=:adresse,activite=:activite WHERE id=:id');
+                                      $req=$bdd->prepare('UPDATE entreprises SET nom=:nom,tel=:tel,mail=:mail,site=:site,adresse=:adresse,activite=:activite WHERE id=:id');
                                       $req->execute(array('nom'=>$_POST['nom'],
                                                           'tel' =>$_POST['tel'],
                                                           'mail'=>$_POST['mail'],
+                                                          'site'=>$_POST['site'],
                                                           'activite'=>$_POST['activite'],
                                                           'adresse'=>$_POST['adresse'],
                                                           'id'=>$id_ok));
@@ -86,6 +87,9 @@ if (isset($id_ok)) {
 }
 elseif (isset($id_ok_suppr)) {
   header('location:classement.php');
+}
+else {
+  header('location:inscription.php');
 }
 
  ?>

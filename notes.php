@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start();
+if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')
+{
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr" />
   <head>
@@ -98,7 +101,7 @@ else {
 
 
               <p>ajouté le : <?php echo htmlspecialchars($info_entreprise['date_affich']); ?></p><a class="bouton_statut" href="notes.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">SUPPRIMER ENTREPRISE</a>
-              <p> <strong><?php echo htmlspecialchars($info_entreprise['nom']); ?></strong>     <em class="titre_info_entreprise">activité</em> : <?php echo htmlspecialchars($info_entreprise['activite']); ?>
+              <p> <strong> <a href="<?php echo htmlspecialchars($info_entreprise['site']); ?>"><?php echo htmlspecialchars($info_entreprise['nom']); ?></a> </strong>     <em class="titre_info_entreprise">activité</em> : <?php echo htmlspecialchars($info_entreprise['activite']); ?>
               <em class="titre_info_entreprise">TEL</em> :  <?php echo htmlspecialchars($info_entreprise['tel']); ?>
               <em class="titre_info_entreprise">Mail</em> :  <?php echo htmlspecialchars($info_entreprise['mail']); ?>
               <em class="titre_info_entreprise">Adressse</em> :  <?php echo htmlspecialchars($info_entreprise['adresse']); ?></p>
@@ -130,6 +133,7 @@ else {
                 <p><label for="nom">Nom de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['nom']); ?>" name="nom" id="nom"   required="required" /></p>
                 <p><label for="tel">tel de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['tel']); ?>" name="tel"id="tel" required="required"/></p>
                 <p><label for="mail">mail de l'entreprise</label> <br /> <input type="text" name="mail"id="mail"   value="<?php echo htmlspecialchars($info_entreprise['mail']); ?>" required="required"/></p>
+                <p><label for="mail">site de l'entreprise</label> <br /> <input type="text" name="site"id="site"   value="<?php echo htmlspecialchars($info_entreprise['site']); ?>" required="required"/></p>
                 <p><label for="activite">activité</label><br /><textarea name="activite" rows="4" cols="40" id="activite" required="required" ><?php echo htmlspecialchars(trim($info_entreprise['activite'])); ?></textarea></p>
                 <p><label for="adresse">adresse de l'entreprise</label> <br /> <textarea name="adresse" id="adresse" required="required" rows="8" cols="80"><?php echo htmlspecialchars(trim($info_entreprise['adresse'])); ?></textarea></p>
                 <p> <input type="text" name="id_entreprise" id="hide" value="<?php echo htmlspecialchars($info_entreprise['id']); ?>"> </p>
@@ -141,3 +145,10 @@ else {
     </section>
   </body>
 </html>
+<?php
+}
+else {
+  header('location:inscription.php');
+}
+
+?>

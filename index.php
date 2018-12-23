@@ -13,7 +13,7 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
     <body>
       <header>
             <nav>
-                <?php include('include/nav.php'); ?>
+                <?php include('include/nav.php');?>
             </nav>
         <h1>DemarchlanD</h1> <br /><h2>Entrer un nouvelle entreprise</h2>
 
@@ -57,7 +57,7 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
       <section>
         <p> !!!! Tout les champs doivent être renseigné quitte à mettre pas de num dans numéro de téléphone  !!!!</p>
 
-        <?php include('include/entreprise_form.php'); ?>
+        <?php include('include/entreprise_form.php');?>
       </section>
 
     </body>

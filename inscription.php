@@ -1,4 +1,11 @@
-<?php session_start();?>
+<?php session_start();
+if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok') {
+  header('location:classement.php');
+}
+else
+{
+?>
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr"/>
   <head>
@@ -94,16 +101,25 @@ if (isset($_SESSION['post_retour'])) {
           </form>
 
           <?php
-  switch ($_SESSION['post_retour']) {
-    case 'pseudo erroné':
-      ?><p><em>pseudo erroné</em></p><?php
-      break;
-    case 'mdp erroné':
-     ?> <p> <em>mot de passe erroné</em> </p> <?php
-     break;
-   }
+          if ($_SESSION['post_retour'])
+          {
+            switch ($_SESSION['post_retour']) {
+              case 'pseudo erroné':
+                ?><p><em>pseudo erroné</em></p><?php
+                break;
+              case 'mdp erroné':
+               ?> <p> <em>mot de passe erroné</em> </p> <?php
+               break;
+             }
+          }
+
            ?>
         </section>
 <?php } ?>
   </body>
 </html>
+
+
+<?php
+}
+?>
