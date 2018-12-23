@@ -20,11 +20,11 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
       </header>
 
       <section class="recherche">
-        <h2>Vérification si l'entreprise existe déjà</h2>
+        <!--<h2>Vérification si l'entreprise existe déjà</h2>
         <form class="recherche_get" action="index.php" method="get">
           <p> <input type="text" name="recherche" autofocus> </p>
       <p> <input type="submit" name="recherche_ok" value="Envoyer" /> </p>
-        </form>
+    </form>-->
         <?php
         try
             {
@@ -35,7 +35,7 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
               die('Erreur : '.$e->getMessage());
             }
 
-        if(isset($_GET['recherche']) && !empty(trim($_GET['recherche'])))
+      /*  if(isset($_GET['recherche']) && !empty(trim($_GET['recherche'])))
         {
           $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret,id_membre FROM entreprises WHERE nom=:recherche AND id_membre=:id_membre');
           $req->execute(array('recherche'=>$_GET['recherche'],
@@ -49,7 +49,7 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
               {
                 echo '  <p class="titre_info_entreprise" >l\'entreprise n\'existe pas dans la base</p>';
               }
-        }
+        }*/
 
 
          ?>

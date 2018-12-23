@@ -177,3 +177,14 @@ td
   width: 250px;
   text-align: right;
 }
+/*------formulaire nouvelle entreprise --------*/
+.saisie_entreprise tr td{
+  text-align: left;
+}
+.saisie_entreprise table tr td input,textarea{
+  width: 100%;
+}
+.input_saisie_entreprise{
+/*border:1px black solid;*/
+padding-top: 20px;
+}

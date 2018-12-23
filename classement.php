@@ -26,7 +26,7 @@ try
                                                <h2>' . $titre . '</h2>
                                                   <div class="box_de_tris">';
                                     //requette de selection des donnée par status de l'entreprise
-                                                $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret,id_membre FROM entreprises WHERE statut=:status AND id_membre=:id_membre ORDER BY interret DESC');
+                                                $req=$bdd->prepare('SELECT id,nom,tel,mail,site,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret,id_membre FROM entreprises WHERE statut=:status AND id_membre=:id_membre ORDER BY interret DESC');
                                                 $req->execute(array('status' => $status,
                                                 'id_membre'=>$_SESSION['id_membre']));
                                                 //alors maintenant on affiche
@@ -50,7 +50,7 @@ try
                                           ?>
                                                    <!--TITRE de l'entreprise-->
 
-                                                   <p> <strong> <?php echo htmlspecialchars($entreprise['nom']) ?> : </strong><a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
+                                                   <p> <strong> <a href="<?php echo htmlspecialchars($entreprise['site']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong><a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
                                                    <form action="classement_post.php" method="post">
                                                      <select name="interret" id="interret">
                                                    <!--affichage en php des différente option selectionné en fonction de la bdd -->

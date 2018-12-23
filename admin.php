@@ -72,5 +72,5 @@ try
 }
 else
 {
-  header('location:classement.php');
+  header('location:inscription.php');
 }

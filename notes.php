@@ -27,7 +27,7 @@
 if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
 {
             $id_entreprise=intval($_GET['id_entreprise']);
-          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret FROM entreprises WHERE id=:id_entreprise');
+          $req=$bdd->prepare('SELECT id,nom,tel,mail,site,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret FROM entreprises WHERE id=:id_entreprise');
           $req->execute(array('id_entreprise'=>$id_entreprise));
           $info_entreprise=$req->fetch();
         //suppr entreprise
@@ -93,56 +93,51 @@ else {
               </select>
               <input type="submit" name="submit" value="ok !!" />
               </form><br />
+<!--   chantier ouvrir php    -->
 
-              <?php
-              echo '
 
-              <p>ajouté le : ' . htmlspecialchars($info_entreprise['date_affich']) . '</p><a class="bouton_statut" href="notes.php?suppr=1&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">SUPPRIMER ENTREPRISE</a>
-              <p> <strong>' . htmlspecialchars($info_entreprise['nom']) . '</strong>     <em class="titre_info_entreprise">activité</em> : ' . htmlspecialchars($info_entreprise['activite']) . '
-              <em class="titre_info_entreprise">TEL</em> :  ' . htmlspecialchars($info_entreprise['tel']) . '
-              <em class="titre_info_entreprise">Mail</em> :  ' . htmlspecialchars($info_entreprise['mail']) . '
-              <em class="titre_info_entreprise">Adressse</em> :  ' . htmlspecialchars($info_entreprise['adresse']) . '</p>
+
+              <p>ajouté le : <?php echo htmlspecialchars($info_entreprise['date_affich']); ?></p><a class="bouton_statut" href="notes.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">SUPPRIMER ENTREPRISE</a>
+              <p> <strong><?php echo htmlspecialchars($info_entreprise['nom']); ?></strong>     <em class="titre_info_entreprise">activité</em> : <?php echo htmlspecialchars($info_entreprise['activite']); ?>
+              <em class="titre_info_entreprise">TEL</em> :  <?php echo htmlspecialchars($info_entreprise['tel']); ?>
+              <em class="titre_info_entreprise">Mail</em> :  <?php echo htmlspecialchars($info_entreprise['mail']); ?>
+              <em class="titre_info_entreprise">Adressse</em> :  <?php echo htmlspecialchars($info_entreprise['adresse']); ?></p>
 
               <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
-              <p><a class="bouton_statut" href="notes_post.php?statut=4&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">refus</a>
-              <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">a demarcher</a>
-              <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">attente rep</a>
-              <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=' . htmlspecialchars($info_entreprise['id']) . '">REPONSE OK IMMINANTE</a><br />
-              <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p>' . nl2br($info_entreprise['notes']) . '</p>
-              ';
-              ?></div><?php
-}
+              <p><a class="bouton_statut" href="notes_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($info_entreprise['id']); ?>">refus</a>
+              <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">a demarcher</a>
+              <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">attente rep</a>
+              <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">REPONSE OK IMMINANTE</a><br />
+              <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p><?php echo nl2br($info_entreprise['notes']); ?></p>
 
-          // ecriture notes et transmition de l'id_entreprise en post via un champ caché
-             echo '
+              </div>
+<?php } ?>
+
+<!--           ecriture notes et transmition de l'id_entreprise en post via un champ caché         -->
+
           <form action="notes_post.php" method="post">
                 <p> <label for="notes">Modifier / mettre a jour / écrire la Note : </label> </p>
-                <p> <textarea name="notes" rows="8" cols="80">' . trim($info_entreprise['notes']) . '</textarea> </p>
-                <p> <input type="text" name="id_entreprise" id="hide" value="' . htmlspecialchars($info_entreprise['id']) . '"> </p>
+                <p> <textarea name="notes" rows="8" cols="80"><?php echo trim($info_entreprise['notes']); ?></textarea> </p>
+                <p> <input type="text" name="id_entreprise" id="hide" value="<?php echo htmlspecialchars($info_entreprise['id']); ?>"> </p>
                 <p> <input type="submit" name="envoyer" value="envoyer" /> </p>
           </form>
-          ';
 
-          echo '<h2>Mise a jours des données de l\'entreprise</h2>
+
+          <h2>Mise a jours des données de l'entreprise</h2>
           <p> <em>Il faut remettre toute les données dans ce formulaire ! </em> </p>
 
           <form class="saisie_entreprise" action="notes_post.php" method="POST">
-                <p><label for="nom">Nom de l\'entreprise</label> <br /> <input type="text" value= "' . htmlspecialchars($info_entreprise['nom']) . '" name="nom" id="nom"   required="required" /></p>
-                <p><label for="tel">tel de l\'entreprise</label> <br /> <input type="text" value= "' . htmlspecialchars($info_entreprise['tel']) . '" name="tel"id="tel" required="required"/></p>
-                <p><label for="mail">mail de l\'entreprise</label> <br /> <input type="text" name="mail"id="mail"   value="' . htmlspecialchars($info_entreprise['mail']) . '" required="required"/></p>
-                <p><label for="activite">activité</label><br /><textarea name="activite" rows="4" cols="40" id="activite" required="required" >' . htmlspecialchars(trim($info_entreprise['activite'])) . '</textarea></p>
-                <p><label for="adresse">adresse de l\'entreprise</label> <br /> <textarea name="adresse" id="adresse" required="required" rows="8" cols="80">' . htmlspecialchars(trim($info_entreprise['adresse'])) . '</textarea></p>
-                <p> <input type="text" name="id_entreprise" id="hide" value=' . htmlspecialchars($info_entreprise['id']) . '> </p>
+                <p><label for="nom">Nom de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['nom']); ?>" name="nom" id="nom"   required="required" /></p>
+                <p><label for="tel">tel de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['tel']); ?>" name="tel"id="tel" required="required"/></p>
+                <p><label for="mail">mail de l'entreprise</label> <br /> <input type="text" name="mail"id="mail"   value="<?php echo htmlspecialchars($info_entreprise['mail']); ?>" required="required"/></p>
+                <p><label for="activite">activité</label><br /><textarea name="activite" rows="4" cols="40" id="activite" required="required" ><?php echo htmlspecialchars(trim($info_entreprise['activite'])); ?></textarea></p>
+                <p><label for="adresse">adresse de l'entreprise</label> <br /> <textarea name="adresse" id="adresse" required="required" rows="8" cols="80"><?php echo htmlspecialchars(trim($info_entreprise['adresse'])); ?></textarea></p>
+                <p> <input type="text" name="id_entreprise" id="hide" value="<?php echo htmlspecialchars($info_entreprise['id']); ?>"> </p>
                 <p><input type="submit" name="valider" value="envoyer" /> </p>
           </form>
-          ';
 
 
-
-}
- ?>
-<h2>supprimer entreprise(a faire)</h2>
-
+<?php } ?>
     </section>
   </body>
 </html>
