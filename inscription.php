@@ -30,21 +30,24 @@ else
 <?php
 $_SESSION['page']="inscription";//HEADER post vers inscription
 // retour d'erreur sur le formulaire
-if (isset($_SESSION['post_retour'])) {
-}
-    switch($_SESSION['post_retour']){
-      case "mdp non conforme":
-        ?><p><em>confirmation mot de passe incorrect</em></p><?php
-        break;
-      case "le pseudo existe déjà":
-        ?><p><em>le pseudo existe déjà</em></p><?php
-        break;
-      case "le mail existe déjà":
-        ?><p><em>mail déjà existant</em></p><?php
-        break;
-      case "ça marche":
-        ?><p>remplir les champs si dessous<?php
-        break;
+if (isset($_SESSION['post_retour']) && $_SESSION['post_retour']=="mdp non conforme" OR $_SESSION['post_retour'] == "le pseudo existe déjà" OR $_SESSION['post_retour']=="le mail existe déjà" OR $_SESSION['post_retour']=="ça marche" )
+{
+
+    switch($_SESSION['post_retour'])
+                {
+                  case "mdp non conforme":
+                    ?><p><em>confirmation mot de passe incorrect</em></p><?php
+                    break;
+                  case "le pseudo existe déjà":
+                    ?><p><em>le pseudo existe déjà</em></p><?php
+                    break;
+                  case "le mail existe déjà":
+                    ?><p><em>mail déjà existant</em></p><?php
+                    break;
+                  case "ça marche":
+                    ?><p>remplir les champs si dessous<?php
+                    break;
+                }
 }
 
 ?>
@@ -101,7 +104,7 @@ if (isset($_SESSION['post_retour'])) {
           </form>
 
           <?php
-          if ($_SESSION['post_retour'])
+          if (isset($_SESSION['post_retour']) && $_SESSION['post_retour']=='pseudo erroné' OR $_SESSION['post_retour']=='mdp erroné' OR $_SESSION['post_retour'] =='connectez-vous')
           {
             switch ($_SESSION['post_retour']) {
               case 'pseudo erroné':
@@ -109,6 +112,9 @@ if (isset($_SESSION['post_retour'])) {
                 break;
               case 'mdp erroné':
                ?> <p> <em>mot de passe erroné</em> </p> <?php
+               break;
+               case 'connectez-vous':
+                ?> <p> <em>connectez vous </em> </p> <?php
                break;
              }
           }

@@ -38,7 +38,7 @@ try
                           <td>date d'inscription</td>
                         </tr>
                         <?php
-                        if (isset($_GET['suppr']) && $_GET['suppr']==1)
+                        if (isset($_GET['suppr']) && $_GET['suppr']==1 && $_GET['id_membre'] != 4)
                          {
                          ?>
                             <p> <em> Etes-vous sûr de vouloir supprimer <?php echo $_GET['pseudo']; ?>  </em> </p>

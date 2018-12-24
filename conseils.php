@@ -103,7 +103,10 @@ if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')
 
      </body>
    </html>
-<?php }
-header('location:inscription.php');
+<?php
+}
+
 else {
-} ?>
+  header('location:inscription.php');
+}
+?>

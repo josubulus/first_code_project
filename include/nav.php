@@ -16,7 +16,12 @@
  </a>
  <a class="lien_menu" href="conseils.php">
    <div class="bouton_menu">
-    cible & conseils recherche
+    cible & conseils
+   </div>
+ </a>
+ <a class="lien_menu" href="paramètres_du_compte.php">
+   <div class="bouton_menu">
+    mon compte
    </div>
  </a>
  <a class="lien_menu" href="logout.php">

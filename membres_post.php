@@ -31,7 +31,8 @@ if (isset($_POST['pseudo']) && !empty(trim($_POST['pseudo'])) && isset($_POST['p
                     $_SESSION['post_retour']="le mail existe déjà";
                   }
                   else {  //requette écriture nouveau membre
-                    $_SESSION['post_retour']='';
+                    $_SESSION['post_retour']='connectez-vous';
+                    $_SESSION['page']='login';
                     //$_SESSION['test_post']=$_POST['mail'];
                             // H pass
                                $pass_hash=password_hash($_POST['pass'],PASSWORD_DEFAULT);
@@ -77,7 +78,7 @@ if (isset($_POST['login_pseudo']) && isset($_POST['login_pass'])) //tchek variab
 }//tchek variables post
 
 //---------supression membre-------
-if (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {  
+if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'] != 4) {
         //suppr membre :
           $req=$bdd->prepare('DELETE FROM membres WHERE id=:id_membre');
           $req->execute(array('id_membre'=>$_GET['id_membre']));
@@ -86,6 +87,42 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {
 
 
 }
+
+//gestion du compte :
+    //mise a jour du mdp :
+    //vérification ancien mdp
+    if (isset($_POST['old_pass']) OR $_POST['new_pass']) {
+      if (isset($_POST['old_pass']) && !empty($_POST['old_pass']))
+            {
+              $req=$bdd->prepare('SELECT pass FROM membres WHERE id=:id_membre');//requête aller chercher mfb bdd
+              $req->execute(array('id_membre' => $_SESSION['id_membre']));
+              $passok=$req->fetch();
+                if (password_verify($_POST['old_pass'],$passok['pass']))
+                {
+                  $_SESSION['post_retour']= "OK";
+                }
+
+                else {
+                $_SESSION['post_retour']='mdp caca';
+                }
+            }
+            else if (isset($_POST['new_pass']) && isset($_POST['confirm_new_pass']) && $_POST['new_pass'] == $_POST['confirm_new_pass'])
+             {
+               $pass_hash=password_hash($_POST['new_pass'],PASSWORD_DEFAULT);
+                    //requette update nouveau membre
+                    $req=$bdd->prepare('UPDATE membres SET pass=:pass WHERE id=:id_membre');
+                    $req->execute(array('id_membre'=>$_SESSION['id_membre'],
+                                        'pass'=>$pass_hash));
+
+
+              /*$_SESSION['post_retour']= "CCACCACFCHHHDDTYDTJYJDTYDTJYDTJYDTJYF";*/
+            }
+            else {
+            $_SESSION['post_retour']='mdp caca';
+            }
+
+    }
+
 
 
 
@@ -98,10 +135,13 @@ if (isset($_SESSION['page']) && $_SESSION['page']=="inscription") {
 if (isset($_SESSION['page']) && $_SESSION['page']=="login") {
   header('location:inscription.php');
 }
-if (isset($_SESSION['page']) && $_SESSION['page']=="login_ok")
-{
-  header('location:classement.php');
-}
+      if (isset($_POST['old_pass']) OR isset($_POST['new_pass'])) {
+        header('location:paramètres_du_compte.php');
+      }
+            else if (isset($_SESSION['page']) && $_SESSION['page']=="login_ok" )
+            {
+              header('location:classement.php');
+            }
 if (isset($_GET['id_membre'])) {
   header('location:admin.php');
 }

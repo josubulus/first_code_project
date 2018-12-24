@@ -1,5 +1,5 @@
 
-  <form class="saisie_entreprise" action="inde_post.php" method="post">
+  <form class="saisie_entreprise" action="index_post.php" method="post">
     <table>
        <tr>
          <td><label for="nom">Nom de l'entreprise :</label></td>

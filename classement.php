@@ -51,7 +51,7 @@ if (isset($_SESSION['page']) && $_SESSION['page']=='login_ok') {//tcheck login
                                             ?>
                                                      <!--TITRE de l'entreprise-->
 
-                                                     <p> <strong> <a href="<?php echo htmlspecialchars($entreprise['site']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong><a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
+                                                     <p> <strong> <a href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong><a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
                                                      <form action="classement_post.php" method="post">
                                                        <select name="interret" id="interret">
                                                      <!--affichage en php des différente option selectionné en fonction de la bdd -->
@@ -100,8 +100,7 @@ if (isset($_SESSION['page']) && $_SESSION['page']=='login_ok') {//tcheck login
                                                     <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
                                                <p><a class="bouton_statut" href="classement_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($entreprise['id']) ?> ">refus</a>
                                                <a class="bouton_statut" href="classement_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">a demarcher</a>
-                                               <a class="bouton_statut" href="classement_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">attente rep</a>
-                                               <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">GERER</a></p>
+                                               <a class="bouton_statut" href="classement_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">attente rep</a></p>
 
 
                                                <?php
