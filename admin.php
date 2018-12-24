@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php if (isset($_SESSION['page']) && $_SESSION['page'] == "login_ok" && $_SESSION['id_membre'] == 4)
+<?php if (isset($_SESSION['page']) && $_SESSION['page'] == "login_ok" && $_SESSION['id_membre'] == 5)
 {
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
                           <td>date d'inscription</td>
                         </tr>
                         <?php
-                        if (isset($_GET['suppr']) && $_GET['suppr']==1 && $_GET['id_membre'] != 4)
+                        if (isset($_GET['suppr']) && $_GET['suppr']==1 && $_GET['id_membre'] != 5)
                          {
                          ?>
                             <p> <em> Etes-vous sûr de vouloir supprimer <?php echo $_GET['pseudo']; ?>  </em> </p>

@@ -1,5 +1,5 @@
 
-<p>Profil de : <?php echo $_SESSION['pseudo_membre']; ?></p>
+
 <div class="menu">
 <?php if (isset($_SESSION['page']) && $_SESSION['page']=="login_ok")
 {
@@ -21,7 +21,7 @@
  </a>
  <a class="lien_menu" href="paramètres_du_compte.php">
    <div class="bouton_menu">
-    mon compte
+     <em><?php echo htmlspecialchars($_SESSION['pseudo_membre']); ?></em>
    </div>
  </a>
  <a class="lien_menu" href="logout.php">
@@ -29,7 +29,7 @@
     logout
    </div>
  </a>
- <?php if (isset($_SESSION['id_membre']) && $_SESSION['id_membre'] == 4 ) {
+ <?php if (isset($_SESSION['id_membre']) && $_SESSION['id_membre'] == 5 ) {
    ?>
    <a class="lien_menu" href="admin.php">
      <div class="bouton_menu">

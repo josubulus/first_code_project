@@ -36,7 +36,7 @@ if (isset($_SESSION['post_retour']) && $_SESSION['post_retour']=="mdp non confor
     switch($_SESSION['post_retour'])
                 {
                   case "mdp non conforme":
-                    ?><p><em>confirmation mot de passe incorrect</em></p><?php
+                    ?><p><em>tu t'es pris les pieds dans les fils en tapant le mdp !!!</em></p><?php
                     break;
                   case "le pseudo existe déjà":
                     ?><p><em>le pseudo existe déjà</em></p><?php

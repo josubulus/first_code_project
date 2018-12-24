@@ -71,7 +71,7 @@ if (isset($_POST['login_pseudo']) && isset($_POST['login_pass'])) //tchek variab
 }//tchek variables post
 
 //---------supression membre-------
-if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'] != 4) {
+if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'] != 5) {
         //suppr membre :
           $req=$bdd->prepare('DELETE FROM membres WHERE id=:id_membre');
           $req->execute(array('id_membre'=>$_GET['id_membre']));
@@ -102,10 +102,11 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'
             else if (isset($_POST['new_pass']) && isset($_POST['confirm_new_pass']) && $_POST['new_pass'] == $_POST['confirm_new_pass'])
              {
                $pass_hash=password_hash($_POST['new_pass'],PASSWORD_DEFAULT);
-                    //requette update nouveau membre
+                    //requette update nouveau pass
                     $req=$bdd->prepare('UPDATE membres SET pass=:pass WHERE id=:id_membre');
                     $req->execute(array('id_membre'=>$_SESSION['id_membre'],
                                         'pass'=>$pass_hash));
+                $_SESSION['post_retour']= "changement effectué";
 
 
               /*$_SESSION['post_retour']= "CCACCACFCHHHDDTYDTJYJDTYDTJYDTJYDTJYF";*/
@@ -114,9 +115,15 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'
             $_SESSION['post_retour']='mdp caca';
             }
 
+    }//variable présentes
+
+    //changement du pseudo
+    if (isset($_POST['new_pseudo']) && !empty($_POST['new_pseudo']))
+    {
+      $req=$bdd->prepare('UPDATE membres SET pseudo=:new_pseudo WHERE id=:id_membre');
+      $req->execute(array('new_pseudo'=>$_POST['new_pseudo'],
+                          'id_membre' =>$_SESSION['id_membre']));
     }
-
-
 
 
 
@@ -128,7 +135,7 @@ if (isset($_SESSION['page']) && $_SESSION['page']=="inscription") {
 if (isset($_SESSION['page']) && $_SESSION['page']=="login") {
   header('location:inscription.php');
 }
-      if (isset($_POST['old_pass']) OR isset($_POST['new_pass'])) {
+      if (isset($_POST['old_pass']) OR isset($_POST['new_pass']) OR isset($_POST['new_pseudo'])) {
         header('location:paramètres_du_compte.php');
       }
             else if (isset($_SESSION['page']) && $_SESSION['page']=="login_ok" )

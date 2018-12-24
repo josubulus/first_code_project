@@ -40,6 +40,14 @@ a:visited
 {
   color: black;
 }
+.box_formulaires{
+  border:1px black solid;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+  background-color: rgb(191,191,191);
+  margin:50px;
+  padding: 20px;
+}
 
 /*-----nav-------*/
 .menu
