@@ -2,6 +2,10 @@
 if (isset($_SESSION['page']) && $_SESSION['page']=='login_ok')
  {
    include('include/login_bdd.php');
+   $req=$bdd->prepare('SELECT * FROM membres WHERE id=:id_membre');
+   $req->execute(array('id_membre'=>$_SESSION['id_membre']));
+   $membre=$req->fetch();
+   $_SESSION['pseudo_membre']=$membre['pseudo'];
        ?>
 
 <!DOCTYPE html>
@@ -27,6 +31,10 @@ if (isset($_SESSION['post_retour']) && $_SESSION['post_retour'] != "OK") {
       break;
     case'changement effectué':
     ?> <p> <em>mot de passe changé</em> </p> <?php
+      break;
+    case 'pseudo déjà utilisé':
+    ?> <p> <em>pseudo déjà utilisé</em> </p> <?php
+      break;
     default:
       ?>retour formulaire<?php
       break;
@@ -83,6 +91,9 @@ else//formulaire ancien mdp
     <section class="box_formulaires"><!--     changer de pseudo    -->
       <form class="saisie_entreprise" action="membres_post.php" method="post">
         <table>
+          <tr>
+            <td>pseudo actuel : </td><td><?php echo $membre['pseudo']; ?></td>
+          </tr>
           <tr>
             <td><label for="new_pseudo">changer pseudo</label></td>
           </tr>

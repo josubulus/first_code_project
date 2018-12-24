@@ -40,13 +40,29 @@ a:visited
 {
   color: black;
 }
+/*------formulaires  --------*/
 .box_formulaires{
-  border:1px black solid;
+  width:50%;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 2px 2px 3px black inset;
   background-color: rgb(191,191,191);
-  margin:50px;
-  padding: 20px;
+  margin:3%;
+  padding: 25px;
+}
+.saisie_entreprise tr td{
+  text-align: left;
+  font-size: 1.2em;
+}
+.saisie_entreprise table tr td input,textarea{
+  width: 100%;
+}
+.input_saisie_entreprise{
+/*border:1px black solid;*/
+padding-top: 20px;
+}
+label
+{
+  font-size: 1,5em;
 }
 
 /*-----nav-------*/
@@ -193,15 +209,4 @@ a:visited
 .membres tr td{
   width: 250px;
   text-align: right;
-}
-/*------formulaire nouvelle entreprise --------*/
-.saisie_entreprise tr td{
-  text-align: left;
-}
-.saisie_entreprise table tr td input,textarea{
-  width: 100%;
-}
-.input_saisie_entreprise{
-/*border:1px black solid;*/
-padding-top: 20px;
 }

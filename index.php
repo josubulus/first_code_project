@@ -47,7 +47,7 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
 
          ?>
       </section>
-      <section>
+      <section class="box_formulaires">
         <p> !!!! Tout les champs doivent être renseigné quitte à mettre pas de num dans numéro de téléphone  !!!!</p>
 
         <?php include('include/entreprise_form.php');?>

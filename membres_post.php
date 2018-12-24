@@ -120,9 +120,21 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'
     //changement du pseudo
     if (isset($_POST['new_pseudo']) && !empty($_POST['new_pseudo']))
     {
-      $req=$bdd->prepare('UPDATE membres SET pseudo=:new_pseudo WHERE id=:id_membre');
-      $req->execute(array('new_pseudo'=>$_POST['new_pseudo'],
-                          'id_membre' =>$_SESSION['id_membre']));
+      $req=$bdd->prepare('SELECT pseudo FROM membres WHERE pseudo=:pseudo_membre');
+      $req->execute(array('pseudo_membre'=>$_POST['new_pseudo']));
+      $membre=$req->fetch();
+      if ( $_POST['new_pseudo'] !== $membre['pseudo'])//vérification pseudo déjà existant
+      {
+        $req=$bdd->prepare('UPDATE membres SET pseudo=:new_pseudo WHERE id=:id_membre');
+        $req->execute(array('new_pseudo'=>$_POST['new_pseudo'],
+                            'id_membre' =>$_SESSION['id_membre']));
+      }//vérification pseudo déjà existant
+      else
+      {
+       $_SESSION['post_retour']="pseudo déjà utilisé";
+      }
+
+
     }
 
 
