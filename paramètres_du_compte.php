@@ -1,14 +1,7 @@
 <?php session_start();
 if (isset($_SESSION['page']) && $_SESSION['page']=='login_ok')
  {
-   try
-       {
-         $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-       }
-       catch (Exception $e)
-       {
-         die('Erreur : '.$e->getMessage());
-       }
+   include('include/login_bdd.php');
        ?>
 
 <!DOCTYPE html>

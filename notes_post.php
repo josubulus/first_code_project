@@ -1,13 +1,6 @@
 <?php
 session_start();
-try
-    {
-      $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-    }
-    catch (Exception $e)
-    {
-      die('Erreur : '.$e->getMessage());
-    }
+include('include/login_bdd.php');
 
     //écriture du status d'interret de l'entreprisetrès interressant 3 interressant 2  juste un taf 1
     if (isset($_POST['interret']) && !empty($_POST['interret']) && $_POST['interret'] <= 3 && $_POST['interret'] >= 1  && isset($_POST['id']) && !empty($_POST['id']))

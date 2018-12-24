@@ -2,27 +2,13 @@
 session_start();
 //connection a la base de donnée
 if (isset($_SESSION['page']) && $_SESSION['page']=='login_ok') {//tcheck login
-  try
-      {
-        $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-      }
-      catch (Exception $e)
-      {
-        die('Erreur : '.$e->getMessage());
-      }
+include('include/login_bdd.php');
 
       // fonction d'affichage des entreprise par status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
       // amélioration faire rajouter un argument pour modifier la mise en page de réponse imminente
       function cadre($status,$titre)
                                   {
-                                    try
-                                        {
-                                          $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                                        }
-                                        catch (Exception $e)
-                                        {
-                                          die('Erreur : '.$e->getMessage());
-                                        }
+                                    include('include/login_bdd.php');
                                       echo '  <div class="box_section">
                                                  <h2>' . $titre . '</h2>
                                                     <div class="box_de_tris">';

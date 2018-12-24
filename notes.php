@@ -10,14 +10,7 @@ if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')
     <title>notes</title>
   </head>
   <body>
-                  <?php try
-                      {
-                        $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8', 'phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                      }
-                      catch (Exception $e)
-                      {
-                        die('Erreur : '.$e->getMessage());
-                      } ?>
+                  <?php include('include/login_bdd.php'); ?>
     <header>
       <h1>Notes</h1>
     </header>

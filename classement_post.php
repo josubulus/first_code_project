@@ -1,13 +1,6 @@
 <?php
 session_start();
-try
-    {
-      $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-    }
-    catch (Exception $e)
-    {
-      die('Erreur : '.$e->getMessage());
-    }
+include('include/login_bdd.php');
 // changement de statut des entreprises
 //statut 1 = a_demarcher 3 en attente de réponse 4 refus
         if (isset($_GET['statut']) && isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))

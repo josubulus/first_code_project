@@ -2,14 +2,7 @@
     <?php
 session_start();
 
-try
-    {
-      $bdd = new PDO('mysql:host=127.0.0.1;dbname=demarchage;charset=utf8','phpmyadmin','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-    }
-    catch (Exception $e)
-    {
-      die('Erreur : '.$e->getMessage());
-    }
+include('include/login_bdd.php');
 
 if (isset($_POST['pseudo']) && !empty(trim($_POST['pseudo'])) && isset($_POST['pass']) && !empty($_POST['pass'])
  && isset($_POST['mail']) && !empty(trim($_POST['mail'])) && isset($_POST['pass_confirm']) && !empty($_POST['pass_confirm']))
