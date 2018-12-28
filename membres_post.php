@@ -96,7 +96,7 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'
                 }
 
                 else {
-                $_SESSION['post_retour']='mdp caca';
+                $_SESSION['post_retour']='mdp erroné';
                 }
             }
             else if (isset($_POST['new_pass']) && isset($_POST['confirm_new_pass']) && $_POST['new_pass'] == $_POST['confirm_new_pass'])
@@ -112,7 +112,7 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'
               /*$_SESSION['post_retour']= "CCACCACFCHHHDDTYDTJYJDTYDTJYDTJYDTJYF";*/
             }
             else {
-            $_SESSION['post_retour']='mdp caca';
+            $_SESSION['post_retour']='mdp erroné';
             }
 
     }//variable présentes

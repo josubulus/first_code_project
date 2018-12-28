@@ -26,7 +26,7 @@ if (isset($_SESSION['page']) && $_SESSION['page']=='login_ok')
 <?php //echo $_SESSION['post_retour'];
 if (isset($_SESSION['post_retour']) && $_SESSION['post_retour'] != "OK") {
   switch ($_SESSION['post_retour']) {
-    case 'mdp caca':
+    case 'mdp erroné':
       ?> <p> <em>mot de passe erroné</em> </p> <?php
       break;
     case'changement effectué':
