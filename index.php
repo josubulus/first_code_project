@@ -20,37 +20,35 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
       </header>
 
       <section class="recherche">
-        <!--<h2>Vérification si l'entreprise existe déjà</h2>
-        <form class="recherche_get" action="index.php" method="get">
-          <p> <input type="text" name="recherche" autofocus> </p>
-      <p> <input type="submit" name="recherche_ok" value="Envoyer" /> </p>
-    </form>-->
+
         <?php
         include('include/login_bdd.php');
-
-      /*  if(isset($_GET['recherche']) && !empty(trim($_GET['recherche'])))
-        {
-          $req=$bdd->prepare('SELECT id,nom,tel,mail,adresse,activite,DATE_FORMAT(date_ajout,"%d / %m / %Y") date_affich,statut,statut_mail,DATE_FORMAT(date_mail,"%d / %m / %Y") date_email,notes,interret,id_membre FROM entreprises WHERE nom=:recherche AND id_membre=:id_membre');
-          $req->execute(array('recherche'=>$_GET['recherche'],
-                              'id_membre'=>$_SESSION['id_membre']));
-          $entreprise_deja_presente=$req->fetch();
-              if ($entreprise_deja_presente['nom'] == $_GET['recherche'])
-               {
-                echo '<p class="titre_info_entreprise" > l\'entreprise :' . htmlspecialchars($entreprise_deja_presente['nom']) . ' existe déjà dans la base </p>';
-              }
-              else
-              {
-                echo '  <p class="titre_info_entreprise" >l\'entreprise n\'existe pas dans la base</p>';
-              }
-        }*/
-
 
          ?>
       </section>
       <section class="box_formulaires">
         <p> !!!! Tout les champs doivent être renseigné quitte à mettre pas de num dans numéro de téléphone  !!!!</p>
 
-        <?php include('include/entreprise_form.php');?>
+        <?php
+
+         /*include('include/entreprise_form.php');*/
+          require 'class/Formulaire.php';
+          $ajout=new Form($_POST);
+        ?>
+        <form class="saisie_entreprise" action="index_post.php" method="post">
+          <?php echo $ajout->input('nom','nom de l\'entreprise');
+                echo $ajout->input('tel','Tel de l\'entrprise');
+                echo $ajout->input('mail','mail de l\'entreprise');
+                echo $ajout->input('site','Site de l\'entreprise');
+                echo $ajout->input('activite','Activitées');
+                echo $ajout->textarea('adresse','adresse');
+                echo $ajout->submit('creer');
+
+
+
+          ?>
+
+        </form>
       </section>
 
     </body>
