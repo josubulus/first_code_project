@@ -24,22 +24,12 @@ include('include/login_bdd.php');
 
                                                       ?>
 
-                                          <?php
-                                          // suppression de l'entreprise (vérifier la sécurité sur le get)
-                                          if (isset($_GET['suppr']) && $_GET['suppr'] ==1 && $_GET['id_entreprise'] == $entreprise['id']) {
-                                            ?>
-                                        <h2>Etes vous sur de vouloir supprimer : <?php echo $entreprise['nom'] ?> </h2>
-                                            <a class="bouton_statut" href="classement_post.php?suppr=1&amp;id_entreprise=<?php echo $entreprise['id'] ?>">oui</a>
-                                              <a class="bouton_statut" href="classement.php">non</a>
-                                            <?php
-                                          }
-                                          else {//si le bouton suppr n'est pas enclancher :
-                                            ?>
+
                                                      <!--TITRE de l'entreprise-->
 
+<p><strong> <a href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong></p>
+                                                     <p><form action="classement_post.php" method="post">
 
-                                                     <form action="classement_post.php" method="post">
-                                                       <p> <strong> <a href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong>
                                                        <select name="interret" id="interret">
                                                      <!--affichage en php des différente option selectionné en fonction de la bdd -->
                                                          <?php if ($entreprise['interret']==3) {
@@ -65,34 +55,18 @@ include('include/login_bdd.php');
                                                          <input type="text" name="id" id="hide" value=" <?php echo $entreprise['id'] ?> ">
                                                        </select>
 
-                                                     </form><br />
-                                                     <a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
-                                                       <?php
-
-                                                           if (isset($entreprise['notes']))
-                                                           {
-                                                             echo '<a class="titre_info_entreprise" href="notes.php?id_entreprise=' . htmlspecialchars($entreprise['id']) . '">|| NOTES ! || </a>';
-                                                           }
-                                                             // a copier : status mail date , mise en page entreprise et bouttons entreprise
-                                                                     if ( isset($entreprise['statut_mail']) && $entreprise['statut_mail'] == 2)
-                                                                      {
-                                                                        echo ' <a href="classement_post.php?statut_mail=1&amp;id_entreprise=' . htmlspecialchars($entreprise['id']) . '"> X </a>MAIL ENVOYE: ' . htmlspecialchars($entreprise['date_email']) . ' </p>';
-                                                                      }
-                                                                      else {
-                                                                       echo '<a class="bouton_statut" href="classement_post.php?statut_mail=2&amp;id_entreprise=' . htmlspecialchars($entreprise['id']) . '">Envoyer mail</a></p>';
-                                                                      }
-                                               ?>
-                                               <p> <em class="titre_info_entreprise"> Activité </em> : <?php echo htmlspecialchars($entreprise['activite']) ?> </p>
-                                               <em class="titre_info_entreprise">ajouté le</em> :<?php echo htmlspecialchars($entreprise['date_affich']) ?> </p>
-
-                                                    <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
-                                               <p><a class="bouton_statut" href="classement_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($entreprise['id']) ?> ">refus</a>
-                                               <a class="bouton_statut" href="classement_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">a demarcher</a>
-                                               <a class="bouton_statut" href="classement_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">attente rep</a></p>
-
-
+                                                     </form></p>
+                                                       <!--ajoute date de mail envoyé -->
+                                               <p><em class="titre_info_entreprise"> Activité </em> : <?php echo htmlspecialchars($entreprise['activite']) ?></p>
+                                               <em class="titre_info_entreprise">ajouté le</em> :<?php echo htmlspecialchars($entreprise['date_affich']) ?>
                                                <?php
-                                          }
+                                             if (isset($entreprise['statut_mail']) && $entreprise['statut_mail'] == 2) {
+                                                  echo '<em class="titre_info_entreprise">mailé : </em> ' . $entreprise['date_email'] . '';
+                                                }
+                                                ?>
+                                             </p>
+                                              <?php
+
 
                                                         echo '</div>';
 
@@ -131,7 +105,7 @@ include('include/login_bdd.php');
                 ?>
   </section><!--box classement--->
     <footer>
-      
+
     </footer>
   </body>
   </html>
