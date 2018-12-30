@@ -8,14 +8,14 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
     <head>
       <meta charset="utf-8" />
       <link rel="stylesheet" href="css/style.css" />
-      <title>demarchage</title>
+      <title>Prospection</title>
     </head>
     <body>
       <header>
             <nav>
                 <?php include('include/nav.php');?>
             </nav>
-        <h1>DemarchlanD</h1> <br /><h2>Entrer un nouvelle entreprise</h2>
+            <h1>Entrer un nouvelle entreprise</h1>
 
       </header>
 
@@ -27,7 +27,6 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
          ?>
       </section>
       <section class="box_formulaires">
-        <p> !!!! Tout les champs doivent être renseigné quitte à mettre une chaine de caractères dans numéro de téléphone  !!!!</p>
 
         <?php
 

@@ -12,13 +12,10 @@ if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')// vérifie que 
   <body>
                   <?php include('include/login_bdd.php'); ?>
     <header>
-      <h1>Notes</h1>
-    </header>
-    <nav>
-      <?php include('include/nav.php'); ?>
-    </nav>
-    <section>
-                    <?php
+      <nav>
+        <?php include('include/nav.php'); ?>
+      </nav>
+<?php
 //récupération des donné de l'entreprise
 if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
 {
@@ -27,6 +24,15 @@ if (isset($_GET['id_entreprise']) && !empty($_GET['id_entreprise']))
           $req->execute(array('id_entreprise'=>$id_entreprise));
           $info_entreprise=$req->fetch();
         //suppr entreprise
+ ?>
+
+
+      <h1><a href="<?php echo htmlspecialchars($info_entreprise['site']); ?>"><?php echo htmlspecialchars($info_entreprise['nom']); ?></a> </h1>
+    </header>
+
+    <section>
+                    <?php
+
 if (isset($_GET['suppr']) && $_GET['suppr'] ==1 && $_GET['id_entreprise'] == $info_entreprise['id']) {
               ?>
             <h2>Etes vous sur de vouloir supprimer : <?php echo $info_entreprise['nom'] ?> </h2>
@@ -46,8 +52,8 @@ else {
                                         <h2>Mise a jours des données de l'entreprise</h2>
                                             <p> <em>Il faut remettre toute les données dans ce formulaire ! </em> </p>
                               <nav>
-                                <p> <a href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>"> RETOURRRRR </a> </p>
-                                <p> <a href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=note"> NOTES </a> </p>
+                                <p> <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>"> RETOURRRRR </a> </p>
+                                <p> <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=note"> NOTES </a> </p>
                               </nav>
                               <form class="saisie_entreprise" action="notes_post.php" method="POST">
                                     <p><label for="nom">Nom de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['nom']); ?>" name="nom" id="nom"   required="required" /></p>
@@ -68,8 +74,8 @@ else {
                     if (isset($_GET['page']) && $_GET['page'] == 'note') {
                       ?>
                       <nav>
-                        <p> <a href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>"> RETOURRRRR </a> </p>
-                        <p> <a href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=update"> MISE A JOUR INFOS </a> </p>
+                        <p> <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>"> RETOURRRRR </a> </p>
+                        <p> <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=update"> MISE A JOUR INFOS </a> </p>
                       </nav>
                       <form action="notes_post.php" method="post">
                             <p> <label for="notes">Modifier / mettre a jour / écrire la Note : </label> </p>
@@ -84,12 +90,17 @@ else {
 
 
                     else {// affichage info entreprises?>
-<nav>
-  <p> <a href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=update"> MISE A JOUR INFOS </a> </p>
-  <p> <a href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=note"> NOTES </a> </p>
-</nav>
+
                       <p>
-                        <strong> <a href="<?php echo htmlspecialchars($info_entreprise['site']); ?>"><?php echo htmlspecialchars($info_entreprise['nom']); ?></a> </strong>
+                        <strong> </strong>
+                        <p><a class="bouton_statut" href="notes.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">SUPPRIMER ENTREPRISE</a>
+                         <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=update"> MISE A JOUR INFOS </a> </p>
+                        <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
+                            <p><a class="bouton_statut" href="notes_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($info_entreprise['id']); ?>">refus</a>
+                            <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">a demarcher</a>
+                            <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">attente rep</a>
+                            <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">REPONSE OK IMMINANTE</a></p><br />
+
                         <?php if ( isset($info_entreprise['statut_mail']) && $info_entreprise['statut_mail'] == 2)
                             {
                             echo '<p> MAIL ENVOYE le : ' . $info_entreprise['date_email'] . '<a class="bouton_statut" href="notes_post.php?statut_mail=1&amp;id_entreprise=' . $info_entreprise['id'] . '"> Mail non envoyé </a> </p>';
@@ -154,18 +165,12 @@ else {
                                   </select>
                             <input type="submit" name="submit" value="ok !!" />
                             </form><br />
+                            <p> <a class="bouton_statut" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=note"> NOTES </a> </p>
+                            <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p><?php echo nl2br(htmlspecialchars($info_entreprise['notes'])); ?>
+
+                            </p>
 
 
-
-
-                      <!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
-                      <p><a class="bouton_statut" href="notes_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($info_entreprise['id']); ?>">refus</a>
-                      <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">a demarcher</a>
-                      <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">attente rep</a>
-                      <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">REPONSE OK IMMINANTE</a><br />
-                      <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p><?php echo nl2br(htmlspecialchars($info_entreprise['notes'])); ?>
-                        <a class="bouton_statut" href="notes.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">SUPPRIMER ENTREPRISE</a>
-                      </p>
 
                       </div>
 

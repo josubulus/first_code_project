@@ -15,6 +15,7 @@ else
   </head>
   <body>
     <header>
+      <h1>Prospection</h1>
     <nav>
       <p> <a class="bouton_statut" href="inscription.php">Connexion</a> </p>
       <p><a class="bouton_statut" href="inscription.php?inscription=1">Inscription</a></p>

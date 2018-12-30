@@ -72,13 +72,20 @@ if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')
                  <p> <a class="bouton_statut" href="conseils.php?new=1">Nouveau conseil</a> </p>
                      <div class="box_de_tris"><!---cadre d'affichage du conseil-->
                        <?php
-                           $req=$bdd->prepare('SELECT id,DATE_FORMAT(date_conseil,"%d / %m / %Y"),conseil,id_membre FROM conseils WHERE id_membre=:id_membre ORDER BY date_conseil DESC');
+                           $req=$bdd->prepare('SELECT id,DATE_FORMAT(date_conseil,"%d / %m / %Y")AS conseil_date,conseil,id_membre FROM conseils WHERE id_membre=:id_membre ORDER BY date_conseil DESC');
                            $req->execute(array('id_membre'=>$_SESSION['id_membre']));
                            /*$conseils = $req->fetch();*/
                              while ($conseils = $req->fetch())
                              {
                                  ?>
-                                 <p> <p><em>Conseils</em> :</p> <?php echo '' . nl2br(htmlspecialchars($conseils['conseil'])) . ''; ?> </p>
+                                 <p>
+
+                                     <p>Date du conseil :<?php echo $conseils['conseil_date']; ?></p>
+                                    <p> <em>Conseils</em> :</p>
+
+                                   <?php echo '' . nl2br(htmlspecialchars($conseils['conseil'])) . ''; ?>
+
+                                 </p>
                                  <p> <a class="bouton_statut"  href="conseils.php?suppr=1&amp;id_ok=<?php echo '' . $conseils['id'] . ''; ?>">supprimer conseil</a>
                                   <a class="bouton_statut"  href="conseils.php?update=1&amp;id_ok=<?php echo '' . $conseils['id'] . ''; ?>">mettre a jour le conseil</a> </p>
                  <?php
