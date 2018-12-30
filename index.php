@@ -27,26 +27,23 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
          ?>
       </section>
       <section class="box_formulaires">
-        <p> !!!! Tout les champs doivent être renseigné quitte à mettre pas de num dans numéro de téléphone  !!!!</p>
+        <p> !!!! Tout les champs doivent être renseigné quitte à mettre une chaine de caractères dans numéro de téléphone  !!!!</p>
 
         <?php
 
          /*include('include/entreprise_form.php');*/
           require 'class/Formulaire.php';
-          $ajout=new Form($_POST);
+          $ajout = new Form($_POST);
         ?>
-        <form class="saisie_entreprise" action="index_post.php" method="post">
-          <?php echo $ajout->input('nom','nom de l\'entreprise');
-                echo $ajout->input('tel','Tel de l\'entrprise');
-                echo $ajout->input('mail','mail de l\'entreprise');
-                echo $ajout->input('site','Site de l\'entreprise');
-                echo $ajout->input('activite','Activitées');
-                echo $ajout->textarea('adresse','adresse');
-                echo $ajout->submit('creer');
-
-
-
-          ?>
+          <form class="saisie_entreprise" action="index_post.php" method="post">
+            <?php echo $ajout->input('nom','nom de l\'entreprise :');
+                  echo $ajout->input('tel','Tel de l\'entreprise :');
+                  echo $ajout->input('mail','mail de l\'entreprise :');
+                  echo $ajout->input('site','Site de l\'entreprise :');
+                  echo $ajout->input('activite','Activitées :');
+                  echo $ajout->textarea('adresse','adresse :');
+                  echo $ajout->submit('creer');
+      ?>
 
         </form>
       </section>

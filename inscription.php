@@ -51,32 +51,23 @@ if (isset($_SESSION['post_retour']) && $_SESSION['post_retour']=="mdp non confor
 }
 
 ?>
+<?php
+require 'class/Formulaire.php';
+$inscription= new Form($_POST);
+?>
+    <div class="box_formulaires">
+      <form action="membres_post.php" method="post">
+<!--vérifier mdp identique dans les 2 champs-->
+            <?php
+              echo $inscription->input('pseudo','Pseudo');
+              echo $inscription->pass('pass','mot de passe');
+              echo $inscription->pass('pass_confirm','confirmation de mot de passe');
+              echo $inscription->mail('mail','@ Email');
+              echo $inscription->submit('creer');
+            ?>
 
-        <form action="membres_post.php" method="post">
-  <!--vérifier mdp identique dans les 2 champs-->
-          <table>
-            <tr>
-              <td> <label for="pseudo">votre pseudo</label> </td>
-              <td> <input type="text" name="pseudo" id="pseudo"  required/> </td>
-            </tr>
-            <tr>
-              <td> <label for="pass">mot de passe ici</label> </td>
-              <td> <input type="password" name="pass" id="pass" required/> </td>
-            </tr>
-            <tr>
-              <td> <label for="pass_confirm">confirmation mot de passe</label> </td>
-              <td> <input type="password" name="pass_confirm" id="pass_confirm" required/> </td>
-            </tr>
-            <tr>
-              <td> <label for="email">email</label> </td>
-              <td> <input type="mail" name="mail" id="mail" placeholder="mail@mail.com" required/> </td>
-            </tr>
-            <tr>
-              <td> <input type="submit" name="submit" value="creer" /> </td>
-            </tr>
-          </table>
-        </form>
-
+      </form>
+    </div>
   </section>
 
   <?php

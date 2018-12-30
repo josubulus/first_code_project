@@ -1,4 +1,4 @@
-<?php
+  <?php
 session_start();
 if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')
 {
@@ -16,10 +16,11 @@ if (isset($_SESSION['page']) && $_SESSION['page'] == 'login_ok')
 
      <body>
        <header>
-         <h1>Conseils et astuces sur les recherches en cours</h1>
+
          <nav>
            <?php include('include/nav.php'); ?>
          </nav>
+         <h1>Conseils et astuces sur les recherches en cours</h1>
        </header>
        <section><!--affichage conseils--->
          <?php

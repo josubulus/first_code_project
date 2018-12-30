@@ -1,8 +1,9 @@
 <?php
-class Form{
 /**
 @class creer des formulaires.
 */
+class Form{
+
 
   public $surround='p';
   public $data;
@@ -11,12 +12,19 @@ class Form{
    $this->data=$data;
  }
                     //méthodes interne a l'instance
-
+/**
+@method sert a entourer les formulaire avec un tag surround accessible depuis l'extèrieur
+*/
   public function surround($html){
     return "<{$this->surround}>{$html}</{$this->surround}>";
   }
+
+
+
+
   /**
-  @method sert a entourer les formulaire avec un tag surround accessible depuis l'extèreieur
+  @method interne a l'instance pour maintenanir les données dans les champs de saisie
+  sur la vue : $objet = new Form($_POST) avant la balise form
   */
   private function getValue($index){
     if (isset($this->data[$index])) {//attention rajout de [$index] non testé.
@@ -26,23 +34,43 @@ class Form{
       return null;
     }
   }
-/**
-@method interne a l'instance pour maintenanir les données dans les champs de saisie
-sur la vue : $objet = new Form($_POST) avant la balise form
-*/
+
 
     //functions de l'instance :
-
+/**
+@method appeler un input password
+@parameters : string nom form puis label form
+*/
+    public function pass($name,$label){
+    return $this->surround('
+  <label for="'.$name.'">' .$label. '</label><br />
+  <input type="password" name="'.$name.'"  required />
+  ');
+  }
+/**
+@method appeler un input text
+@parameters : string nom form puis label form
+*/
   public function input($name,$label){
   return $this->surround('
 <label for="'.$name.'">' .$label. '</label><br />
 <input type="text" name="'.$name.'" value="'.$this->getValue($name).'" required />
 ');
 }
+
 /**
-@method appeler un input text
+@method appeler un input mail
 @parameters : string nom form puis label form
 */
+
+public function mail($name,$label){
+return $this->surround('
+<label for="'.$name.'">' .$label. '</label><br />
+<input type="mail" name="'.$name.'" value="'.$this->getValue($name).'" required />
+');
+}
+
+
 public function textarea($name,$label){
   return $this->surround('
       <label for="'.$name.'">' .$label. '</label><br />
@@ -50,13 +78,14 @@ public function textarea($name,$label){
 
   ');
 }
+/**
+@method appeler un bouton de validation
+*/
+
  public function submit($value){
    return $this->surround('<button type="submit" name="button">' . $value . '</button>');
  }
 
- /**
-@method appeler un bouton de validation
- */
 
 }
  ?>

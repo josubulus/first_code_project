@@ -104,7 +104,7 @@ else {
               <a class="bouton_statut" href="notes_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">a demarcher</a>
               <a class="bouton_statut" href="notes_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">attente rep</a>
               <a class="bouton_statut" href="notes_post.php?statut=2&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">REPONSE OK IMMINANTE</a><br />
-              <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p><?php echo nl2br($info_entreprise['notes']); ?></p>
+              <p><em class="titre_info_entreprise">Notes et commentaires : </em></p><p><?php echo nl2br(htmlspecialchars($info_entreprise['notes'])); ?></p>
 
               </div>
 <?php } ?>

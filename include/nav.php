@@ -4,38 +4,38 @@
 <?php if (isset($_SESSION['page']) && $_SESSION['page']=="login_ok")
 {
 ?>
-<a class="lien_menu" href="index.php">
-  <div class="bouton_menu">
-      ajouter une entreprise
-  </div>
-</a>
-<a class="lien_menu" href="classement.php">
-   <div class="bouton_menu">
-    classement
-   </div>
- </a>
- <a class="lien_menu" href="conseils.php">
-   <div class="bouton_menu">
-    cible & conseils
-   </div>
- </a>
- <a class="lien_menu" href="paramètres_du_compte.php">
-   <div class="bouton_menu">
-     <em><?php echo htmlspecialchars($_SESSION['pseudo_membre']); ?></em>
-   </div>
- </a>
- <a class="lien_menu" href="logout.php">
-   <div class="bouton_menu">
-    logout
-   </div>
- </a>
+<div>
+  <a class="lien_menu" href="index.php">
+        ajouter une entreprise
+  </a>
+</div>
+<div >
+  <a class="lien_menu" href="classement.php">
+      classement
+   </a>
+</div>
+ <div>
+   <a class="lien_menu" href="conseils.php">
+      cible & conseils
+   </a>
+ </div>
+ <div >
+   <a class="lien_menu" href="paramètres_du_compte.php">
+       <em class ="pseudo_menu"><?php echo htmlspecialchars($_SESSION['pseudo_membre']); ?></em>
+   </a>
+ </div>
+ <div>
+   <a class="lien_menu" href="logout.php">
+      logout
+   </a>
+ </div>
  <?php if (isset($_SESSION['id_membre']) && $_SESSION['id_membre'] == 5 ) {
    ?>
-   <a class="lien_menu" href="admin.php">
-     <div class="bouton_menu">
-      admin
-     </div>
-   </a>
+   <div>
+     <a class="lien_menu" href="admin.php">
+        admin
+     </a>
+   </div>
    <?php
  } ?>
 
@@ -43,11 +43,12 @@
 }
 else {
   ?>
+<div>
   <a class="lien_menu" href="inscription.php">
-    <div class="bouton_menu">
+
         log in (dev) / inscription
-    </div>
   </a>
+</div>
   <?php
 } ?>
 

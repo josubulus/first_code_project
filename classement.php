@@ -37,34 +37,36 @@ include('include/login_bdd.php');
                                             ?>
                                                      <!--TITRE de l'entreprise-->
 
-                                                     <p> <strong> <a href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong><a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
+
                                                      <form action="classement_post.php" method="post">
+                                                       <p> <strong> <a href="notes.php?id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>"><?php echo htmlspecialchars($entreprise['nom']) ?></a> : </strong>
                                                        <select name="interret" id="interret">
                                                      <!--affichage en php des différente option selectionné en fonction de la bdd -->
                                                          <?php if ($entreprise['interret']==3) {
-                                                           echo '<option value="3" selected >très interressant</option>';
+                                                           echo '<option value="3" selected >fort</option>';
                                                          }
                                                          else {
-                                                           echo '<option value="3">très interressant</option>';
+                                                           echo '<option value="3">fort</option>';
                                                          }
                                                          if ($entreprise['interret']==2) {
-                                                           echo '<option value="2" selected>interressant</option>';
+                                                           echo '<option value="2" selected>moyen</option>';
                                                          }
                                                          else {
-                                                           echo '<option value="2">interressant</option>';
+                                                           echo '<option value="2">moyen</option>';
                                                          }
                                                          if ($entreprise['interret']==1) {
-                                                           echo '<option value="1" selected>juste un taf</option>';
+                                                           echo '<option value="1" selected>faible</option>';
                                                          }
                                                          else {
-                                                           echo '<option value="1">juste un taf</option>';
+                                                           echo '<option value="1">faible</option>';
                                                          }
                                                          ?>
-
+                                                        <input type="submit" name="submit" value="ok !!" />
                                                          <input type="text" name="id" id="hide" value=" <?php echo $entreprise['id'] ?> ">
                                                        </select>
-                                                       <input type="submit" name="submit" value="ok !!" />
+
                                                      </form><br />
+                                                     <a class="bouton_statut" href="classement.php?suppr=1&amp;id_entreprise=<?php echo htmlspecialchars($entreprise['id']) ?>">SUPPR</a>
                                                        <?php
 
                                                            if (isset($entreprise['notes']))
@@ -119,7 +121,7 @@ include('include/login_bdd.php');
   <!---affichage des classements----->
     <section id="box_classement">
                 <?php
-                cadre(2,'<em>!! OK !!</em>');
+                cadre(2,'!! OK !!');
   //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
                 cadre(3,'Attente Réponse');
   //status : 1 2 3 4 = a demarcher, reponse imminente , attente réponse , refus
@@ -129,9 +131,7 @@ include('include/login_bdd.php');
                 ?>
   </section><!--box classement--->
     <footer>
-      <nav>
-        <?php include('include/nav.php'); ?>
-      </nav>
+      
     </footer>
   </body>
   </html>
