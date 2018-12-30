@@ -209,3 +209,23 @@ label
   width: 250px;
   text-align: right;
 }
+/*-------mise en page notes entreprise------*/
+.liste_modif_entreprise,.liste_modif_entreprise li{
+  list-style-type: none;
+}
+.liste_modif_entreprise li{
+  padding: 5px;
+}
+.bouton_modif{
+  background-color: white;
+  padding: 2px;
+  border-radius: 2px;
+
+}
+.bouton_modif:hover{
+  background-color: rgb(0,225,255);
+  box-shadow: 1px 1px 1px black inset;
+}
+.bloc_entreprise_et_notes{
+  display: flex;
+}
