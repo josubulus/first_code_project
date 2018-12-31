@@ -25,7 +25,7 @@ if (isset($_POST['pseudo']) && !empty(trim($_POST['pseudo'])) && isset($_POST['p
                   }
                   else {  //requette écriture nouveau membre
                     $_SESSION['post_retour']='connectez-vous';
-                    $_SESSION['page']='login';
+                    $_SESSION['page']='login_ok';
                     //$_SESSION['test_post']=$_POST['mail'];
                             // H pass
                                $pass_hash=password_hash($_POST['pass'],PASSWORD_DEFAULT);
@@ -141,8 +141,11 @@ if (isset($_GET['id_membre']) && !empty($_GET['id_membre']) && $_GET['id_membre'
 
 
 //header en fonction de la page qui envoit le formulaire tester et fonctionnnel
+if ($_SESSION['page'] == "admin") {
+  header('location:admin.php');
+}
 if (isset($_SESSION['page']) && $_SESSION['page']=="inscription") {
-  header('location:inscription.php?inscription=1');
+  header('location:admin.php');
 }
 if (isset($_SESSION['page']) && $_SESSION['page']=="login") {
   header('location:inscription.php');

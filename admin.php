@@ -1,5 +1,6 @@
 <?php session_start(); ?>
-<?php if (isset($_SESSION['page']) && $_SESSION['page'] == "login_ok" && $_SESSION['id_membre'] == 5)
+
+<?php if (isset($_SESSION['page']) && $_SESSION['page'] == "login_ok"   && $_SESSION['id_membre'] == 5)
 {
 ?>
 <!DOCTYPE html>
@@ -54,7 +55,51 @@
                       <?php }
                     }?>
                     </table>
+                    <section>
+                      <h1>Inscription</h1>
 
+                  <?php
+                  $_SESSION['page']="login_ok";//HEADER post vers inscription
+                  // retour d'erreur sur le formulaire
+                  if (isset($_SESSION['post_retour']) && $_SESSION['post_retour']=="mdp non conforme" OR $_SESSION['post_retour'] == "le pseudo existe déjà" OR $_SESSION['post_retour']=="le mail existe déjà" OR $_SESSION['post_retour']=="ça marche" )
+                  {
+
+                      switch($_SESSION['post_retour'])
+                                  {
+                                    case "mdp non conforme":
+                                      ?><p><em>mot de passe erroné</em></p><?php
+                                      break;
+                                    case "le pseudo existe déjà":
+                                      ?><p><em>le pseudo existe déjà</em></p><?php
+                                      break;
+                                    case "le mail existe déjà":
+                                      ?><p><em>mail déjà existant</em></p><?php
+                                      break;
+                                    case "ça marche":
+                                      ?><p>remplir les champs si dessous<?php
+                                      break;
+                                  }
+                  }
+
+                  ?>
+                  <?php
+                  require 'class/Formulaire.php';
+                  $inscription= new Form($_POST);
+                  ?>
+                      <div class="box_formulaires">
+                        <form action="membres_post.php" method="post">
+                  <!--vérifier mdp identique dans les 2 champs-->
+                              <?php
+                                echo $inscription->input('pseudo','Pseudo');
+                                echo $inscription->pass('pass','mot de passe');
+                                echo $inscription->pass('pass_confirm','confirmation de mot de passe');
+                                echo $inscription->mail('mail','@ Email');
+                                echo $inscription->submit('creer');
+                              ?>
+
+                        </form>
+                      </div>
+                    </section>
 
     </section>
   </body>

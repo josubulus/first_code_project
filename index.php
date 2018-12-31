@@ -15,7 +15,7 @@ if(isset($_SESSION['page']) && $_SESSION['page']=="login_ok")//si login ok
             <nav>
                 <?php include('include/nav.php');?>
             </nav>
-            <h1>Entrer un nouvelle entreprise</h1>
+            <h1>Entrer une nouvelle entreprise</h1>
 
       </header>
 

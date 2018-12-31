@@ -56,14 +56,18 @@ else {
                                 <p> <a class="bouton_modif" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=note"> NOTES </a> </p>
                               </nav>
                               <form class="saisie_entreprise" action="notes_post.php" method="POST">
-                                    <p><label for="nom">Nom de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['nom']); ?>" name="nom" id="nom"   required="required" /></p>
-                                    <p><label for="tel">tel de l'entreprise</label> <br /> <input type="text" value= "<?php echo htmlspecialchars($info_entreprise['tel']); ?>" name="tel"id="tel" required="required"/></p>
-                                    <p><label for="mail">mail de l'entreprise</label> <br /> <input type="text" name="mail"id="mail"   value="<?php echo htmlspecialchars($info_entreprise['mail']); ?>" required="required"/></p>
-                                    <p><label for="mail">site de l'entreprise</label> <br /> <input type="text" name="site"id="site"   value="<?php echo htmlspecialchars($info_entreprise['site']); ?>" required="required"/></p>
-                                    <p><label for="activite">activité</label><br /><textarea name="activite" rows="4" cols="40" id="activite" required="required" ><?php echo htmlspecialchars(trim($info_entreprise['activite'])); ?></textarea></p>
-                                    <p><label for="adresse">adresse de l'entreprise</label> <br /> <textarea name="adresse" id="adresse" required="required" rows="8" cols="80"><?php echo htmlspecialchars(trim($info_entreprise['adresse'])); ?></textarea></p>
-                                    <p> <input type="text" name="id_entreprise" id="hide" value="<?php echo htmlspecialchars($info_entreprise['id']); ?>"> </p>
-                                    <p><input type="submit" name="valider" value="envoyer" /> </p>
+                                    <?php
+                                      require 'class/Formulaire.php';
+                                      $ajour = new Form($info_entreprise);
+                                      echo $ajour->input('nom','Nom De l Entreprise');
+                                      echo $ajour->input('tel','TEL');
+                                      echo $ajour->input('mail','@mail');
+                                      echo $ajour->input('site','site de l\'entreprise');
+                                      echo $ajour->input('activite','Activite');
+                                      echo $ajour->textarea('adresse','Adresse');
+                                      echo $ajour->submit('envoyer');?>
+                                     <p> <input type="text" name="id_entreprise" id="hide" value="<?php echo htmlspecialchars($info_entreprise['id']); ?>"> </p>
+
                               </form>
                               <?php
                             }
@@ -78,10 +82,12 @@ else {
                         <p> <a class="bouton_modif" href="notes.php?id_entreprise=<?php echo $_GET['id_entreprise'] ?>&amp;page=update"> MISE A JOUR INFOS </a> </p>
                       </nav>
                       <form action="notes_post.php" method="post">
-                            <p> <label for="notes">Modifier / mettre a jour / écrire la Note : </label> </p>
-                            <p> <textarea name="notes" rows="8" cols="80"><?php echo trim($info_entreprise['notes']); ?></textarea> </p>
+                            <?php
+                              require 'class/Formulaire.php';
+                              $note = new Form($info_entreprise);
+                             echo $note->textarea('notes','NOTES : ');
+                             echo $note->submit('sauvegarder');?>
                             <p> <input type="text" name="id_entreprise" id="hide" value="<?php echo htmlspecialchars($info_entreprise['id']); ?>"> </p>
-                            <p> <input type="submit" name="envoyer" value="envoyer" /> </p>
                       </form>
                       <?php
                     }
@@ -147,14 +153,14 @@ else {
             }
             else
             {
-            echo '<p><a class="bouton_statut" href="notes_post.php?statut_mail=2&amp;id_entreprise=' . $info_entreprise['id'] . '"> contact par mail effectué</a></p>';
+            echo '<p><a class="bouton_modif" href="notes_post.php?statut_mail=2&amp;id_entreprise=' . $info_entreprise['id'] . '"> contact par mail effectué</a></p>';
             } ?>
                                     <ul><!--bouton de tris des entreprise par status : 1= a demarcher 3=attente réponse 4=refusé-->
                                       <li> <h3> Status de l'entreprise :  </h3> </li>
                                       <li><a class="bouton_modif" href="notes_post.php?statut=4&amp;id_entreprise= <?php echo htmlspecialchars($info_entreprise['id']); ?>">refus</a></li>
                                       <li><a class="bouton_modif" href="notes_post.php?statut=1&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">a demarcher</a></li>
                                       <li><a class="bouton_modif" href="notes_post.php?statut=3&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">attente rep</a></li>
-                                      <li><a class="bouton_modif" href="notes_post.php?statut=2&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">REPONSE OK IMMINANTE</a></li>
+                                      <li><a class="bouton_modif" href="notes_post.php?statut=2&amp;id_entreprise=<?php echo htmlspecialchars($info_entreprise['id']); ?>">REPONSE OK</a></li>
                                     </ul>
                             </ul>
                             <ul>
